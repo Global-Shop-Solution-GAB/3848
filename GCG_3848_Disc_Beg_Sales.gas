@@ -1,0 +1,207 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form1..create
+gui.SS_Form1..caption("Discounts - Initial Net Sales")
+gui.SS_Form1..size(4320,2295)
+gui.SS_Form1..position(0,0)
+gui.SS_Form1..event(unload,Ss_form1_unload)
+gui.SS_Form1..alwaysontop(False)
+gui.SS_Form1..fontname("Arial")
+gui.SS_Form1..fontsize(8)
+gui.SS_Form1..forecolor(0)
+gui.SS_Form1..fontstyle(,,,,)
+gui.SS_Form1..BackColor(-2147483633)
+gui.SS_Form1..controlbox(True)
+gui.SS_Form1..maxbutton(False)
+gui.SS_Form1..minbutton(False)
+gui.SS_Form1..mousepointer(0)
+gui.SS_Form1..moveable(True)
+gui.SS_Form1..sizeable(False)
+gui.SS_Form1..ShowInTaskBar(True)
+gui.SS_Form1..titlebar(True)
+gui.SS_Form1.lbl_txtCustomer.create(label,"Customer",True,1800,200,1,100,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtCustomer.defaultvalue("")
+gui.SS_Form1.lbl_txtCustomer.controlgroup(0)
+gui.SS_Form1.txtCustomer.create(textbox,"",True,1800,330,0,100,335,False,0,Arial,8,16777215,1)
+gui.SS_Form1.txtCustomer.defaultvalue("")
+gui.SS_Form1.txtCustomer.controlgroup(0)
+gui.SS_Form1.cmd_txtCustomer.create(button)
+gui.SS_Form1.cmd_txtCustomer.caption("^")
+gui.SS_Form1.cmd_txtCustomer.visible(True)
+gui.SS_Form1.cmd_txtCustomer.size(330,330)
+gui.SS_Form1.cmd_txtCustomer.zorder(0)
+gui.SS_Form1.cmd_txtCustomer.position(1900,300)
+gui.SS_Form1.cmd_txtCustomer.enabled(True)
+gui.SS_Form1.cmd_txtCustomer.fontname("Arial")
+gui.SS_Form1.cmd_txtCustomer.fontsize(8)
+gui.SS_Form1.cmd_txtCustomer.event(click,cmd_txtcustomer_click)
+gui.SS_Form1.cmd_txtCustomer.defaultvalue("")
+gui.SS_Form1.cmd_txtCustomer.controlgroup(0)
+gui.SS_Form1.lbl_txtInitialNetSales.create(label,"Initial Net Sales",True,1800,200,1,100,700,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtInitialNetSales.defaultvalue("")
+gui.SS_Form1.lbl_txtInitialNetSales.controlgroup(0)
+gui.SS_Form1.txtInitialNetSales.create(textbox,"",True,1800,330,0,100,900,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtInitialNetSales.numericonly(1)
+gui.SS_Form1.txtInitialNetSales.defaultvalue("")
+gui.SS_Form1.txtInitialNetSales.controlgroup(0)
+gui.SS_Form1.cmdSave.create(button)
+gui.SS_Form1.cmdSave.caption("Save")
+gui.SS_Form1.cmdSave.visible(True)
+gui.SS_Form1.cmdSave.size(1000,360)
+gui.SS_Form1.cmdSave.zorder(0)
+gui.SS_Form1.cmdSave.position(100,1345)
+gui.SS_Form1.cmdSave.enabled(True)
+gui.SS_Form1.cmdSave.fontname("Arial")
+gui.SS_Form1.cmdSave.fontsize(8)
+gui.SS_Form1.cmdSave.event(click,cmdsave_click)
+gui.SS_Form1.cmdSave.defaultvalue("")
+gui.SS_Form1.cmdSave.controlgroup(0)
+gui.SS_Form1.txtPG.create(textbox,"",True,1800,300,0,2105,920,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtPG.numericonly(0)
+gui.SS_Form1.txtPG.maxLength(30)
+gui.SS_Form1.txtPG.defaultvalue("")
+gui.SS_Form1.txtPG.controlgroup(0)
+gui.SS_Form1.lbl3.create(label,"Initial Price Group",True,1590,195,1,2120,695,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl3.defaultvalue("")
+gui.SS_Form1.lbl3.controlgroup(0)
+gui.SS_Form1.cmd_txtCustomer.tabstop(True)
+gui.SS_Form1.cmd_txtCustomer.tabindex(1)
+gui.SS_Form1.txtInitialNetSales.tabstop(True)
+gui.SS_Form1.txtInitialNetSales.tabindex(2)
+gui.SS_Form1.txtPG.tabstop(True)
+gui.SS_Form1.txtPG.tabindex(3)
+gui.SS_Form1.cmdSave.tabstop(True)
+gui.SS_Form1.cmdSave.tabindex(4)
+gui.SS_Form1.txtCustomer.tabstop(True)
+gui.SS_Form1.txtCustomer.tabindex(5)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'Quote 4206
+'Discount Beginning Net Sales program part
+'coded by TRT
+'2/22/13
+
+'program will be used for putting in the beginning net sales balance for customers. This program will only be used to enter in
+'a initial starting net sales amount for customer since sales history will not exist when the programs are first going to be used.
+'The program will display a screen 'that has a text box labelled as Customer and a browser button that allows a user to select a
+'customer from the customer 'master table. Then beside it a text box labelled as Initial Net Sales that will allow the user to enter in
+' a float value. This information will be saved to a table that stores:
+'Customer - String - Customer ID of customer selected
+'Initial Net Sales - Float - Net sales value entered
+
+V.Local.bRet.Declare(Boolean)
+
+F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+F.ODBC.Connection!conx.TableExists("GCG_3848_Beg_Sales",V.Local.bRet)
+F.Intrinsic.Control.If(V.Local.bret,=,True)
+	Gui.SS_Form1..Show
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.Msgbox("GCG_3848_Beg_Sales table not found.","Table Not Found")
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+F.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+program.sub.cmd_txtcustomer_click.start
+'customer browser using common browser with id 205
+
+V.Local.sRet.Declare(String)
+V.Local.sSQL.Declare(String)
+
+F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+F.Intrinsic.UI.Browser(205,"",V.Local.sRet)
+
+F.Intrinsic.Control.If(V.Local.sRet,=,"***CANCEL***")
+	F.Intrinsic.Control.Exitsub
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.SS_Form1.txtCustomer.Text(V.Local.sRet(0))
+	F.Intrinsic.String.Concat("Select * From GCG_3848_Beg_Sales Where Customer = '",V.Local.sRet(0).Trim,"'",V.Local.sSQL)
+	F.ODBC.Connection!conx.OpenLocalRecordsetRO("Rst",V.Local.sSQL)
+	F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,<>,True)
+		Gui.SS_Form1.txtInitialNetSales.Text(V.ODBC.conx!rst.FieldValTrim!Init_Net_Sales)
+                Gui.SS_Form1.txtPG.Text(V.ODBC.conx!Rst.FieldValTrim!Init_Price_Group)
+		F.ODBC.conx!rst.Close
+	F.Intrinsic.Control.Else
+		Gui.SS_Form1.txtInitialNetSales.Text("0")
+                Gui.SS_Form1.txtPG.Text("")
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_txtcustomer_click.end
+
+program.sub.cmdsave_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdsave_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'save to the table
+
+V.Local.sQuery.Declare(String)
+V.Local.sSQL.Declare(String)
+
+F.Intrinsic.Control.If(V.Screen.SS_Form1!txtCustomer.Text,=,"")
+	F.Intrinsic.UI.Msgbox("Please select a Customer from the browser.","Not Saved")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+'open recordset
+F.Intrinsic.String.Concat(" Select * From GCG_3848_Beg_Sales Where Customer = '",V.screen.SS_Form1!txtCustomer.Text,"'",V.Local.sSQL)
+F.ODBC.Connection!conx.OpenLocalRecordsetRW("rst",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,True)
+	F.ODBC.conx!rst.AddNew
+	F.ODBC.conx!rst.Set!Customer(V.Screen.SS_Form1!txtCustomer.Text)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.Screen.SS_Form1!txtInitialNetSales.Text,=,"")
+	F.ODBC.conx!rst.Set!Init_Net_Sales("0")
+	F.ODBC.conx!Rst.Set!Init_Price_Group("")
+F.Intrinsic.Control.Else
+	F.ODBC.conx!rst.Set!Init_Net_Sales(V.Screen.SS_Form1!txtInitialNetSales.Text)
+        F.ODBC.conx!Rst.Set!Init_Price_Group(V.Screen.SS_Form1!txtPG.Text)
+F.Intrinsic.Control.EndIf
+F.ODBC.conx!rst.Update
+F.ODBC.conx!rst.Close
+'F.Intrinsic.UI.Msgbox("Initial Net Sales Saved.","Saved")
+'clear out the text boxes
+Gui.SS_Form1.txtCustomer.Text("")
+Gui.SS_Form1.txtInitialNetSales.Text("")
+Gui.SS_Form1.txtPG.Text("")
+Gui.SS_Form1.cmd_txtCustomer.SetFocus
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdsave_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Beg_Sales.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdsave_click.end
+
+program.sub.ss_form1_unload.start
+F.ODBC.Connection!conx.Close
+F.Intrinsic.Control.End
+
+program.sub.ss_form1_unload.end
+
+Program.Sub.Comments.Start
+${$0$}$GCG_Beg_Net_Sales_Discount$}$SUPERVSR$}$2/22/2013
+Program.Sub.Comments.End
+Program.Sub.ScreenSS.Start
+SS_Form1{{CAPTION::Beginning Net Sales Discount
+SS_Form1.CTRL{{NAME::txtCustomer\\TYPE::2\\CAPTION::Customer\\GROUP::1\\BROWSER::1\\SIZE::1
+SS_Form1.CTRL{{NAME::txtInitialNetSales\\TYPE::2\\CAPTION::Initial Net Sales\\GROUP::1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::cmdSave\\TYPE::5\\CAPTION::Save\\GROUP::-1\\BROWSER::0\\SIZE::1
+
+Program.Sub.ScreenSS.End
+
