@@ -1,0 +1,350 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form1..create
+gui.SS_Form1..caption("Year End Update - Customer Initial Sales")
+gui.SS_Form1..size(4710,1825)
+gui.SS_Form1..position(0,0)
+gui.SS_Form1..event(unload,ss_form1_unload)
+gui.SS_Form1..alwaysontop(False)
+gui.SS_Form1..fontname("Arial")
+gui.SS_Form1..fontsize(8)
+gui.SS_Form1..forecolor(0)
+gui.SS_Form1..fontstyle(False,False,False,False,)
+gui.SS_Form1..BackColor(-2147483633)
+gui.SS_Form1..controlbox(True)
+gui.SS_Form1..maxbutton(False)
+gui.SS_Form1..minbutton(False)
+gui.SS_Form1..mousepointer(0)
+gui.SS_Form1..moveable(True)
+gui.SS_Form1..sizeable(False)
+gui.SS_Form1..ShowInTaskBar(True)
+gui.SS_Form1..titlebar(True)
+gui.SS_Form1.lbl_dtpStart.create(label,"Beginning Date",True,1800,200,1,100,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_dtpStart.defaultvalue("")
+gui.SS_Form1.lbl_dtpStart.controlgroup(0)
+gui.SS_Form1.dtpStart.create(datepicker)
+gui.SS_Form1.dtpStart.visible(True)
+gui.SS_Form1.dtpStart.size(1800,345)
+gui.SS_Form1.dtpStart.zorder(0)
+gui.SS_Form1.dtpStart.position(100,335)
+gui.SS_Form1.dtpStart.enabled(True)
+gui.SS_Form1.dtpStart.checkbox(False)
+gui.SS_Form1.dtpStart.defaultvalue("")
+gui.SS_Form1.dtpStart.controlgroup(0)
+gui.SS_Form1.lbl_dtpEnd.create(label,"Ending Date",True,1800,200,1,2210,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_dtpEnd.defaultvalue("")
+gui.SS_Form1.lbl_dtpEnd.controlgroup(0)
+gui.SS_Form1.dtpEnd.create(datepicker)
+gui.SS_Form1.dtpEnd.visible(True)
+gui.SS_Form1.dtpEnd.size(1800,345)
+gui.SS_Form1.dtpEnd.zorder(0)
+gui.SS_Form1.dtpEnd.position(2210,335)
+gui.SS_Form1.dtpEnd.enabled(True)
+gui.SS_Form1.dtpEnd.checkbox(False)
+gui.SS_Form1.dtpEnd.defaultvalue("")
+gui.SS_Form1.dtpEnd.controlgroup(0)
+gui.SS_Form1.cmdUpdate.create(button)
+gui.SS_Form1.cmdUpdate.caption("Update")
+gui.SS_Form1.cmdUpdate.visible(True)
+gui.SS_Form1.cmdUpdate.size(1000,360)
+gui.SS_Form1.cmdUpdate.zorder(0)
+gui.SS_Form1.cmdUpdate.position(100,850)
+gui.SS_Form1.cmdUpdate.enabled(True)
+gui.SS_Form1.cmdUpdate.fontname("Arial")
+gui.SS_Form1.cmdUpdate.fontsize(8)
+gui.SS_Form1.cmdUpdate.event(click,cmdupdate_click)
+gui.SS_Form1.cmdUpdate.defaultvalue("")
+gui.SS_Form1.cmdUpdate.controlgroup(0)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.UDT.uCustomer.Define("Customer",String,Customer)
+Variable.uGlobal.uCustomer.Declare("uCustomer")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'Quote 4206
+'for MicroTrak
+'Coded by TRT
+'2/22/13
+
+
+''GAB program that is ran as part of the year end process. This program will display two date pickers that allows the user to select a date range. Then there will be a Update button.
+'When the user presses the button the program will inform the user that the program is about to update the initial net sales 'amount for each customer which could impact the discount rate for customers.
+'If the user decides to proceed the program will 'run for each customer and use the core program created to calculate the net sales for each customer for the time period 'selected by the customer.
+'The date range selected should be the beginning to end of prior year. As the program calculates 'each customer it will check the table created above that was used in setting the initial net sales to update and existing
+'customer that already exists in the table, otherwise it will add a new record for any non-existing customers. This program 'is used for calculating the initial discount customers receive for the next year based on the previous
+'years net sales. As 'each customer is updated it will call a core module that will be created that is passed the customer that a discount change 'is occurring. This in return will call the program explained below for determining
+'the discount percentage that will be 'hooked on a new process hook inside the discount module for core.
+
+
+
+'012/29/2014
+'mods by TRT, its to slow for the customer so we are going to first check and see if their amuont sales has changed from whats in the table.
+'if they have we will call the discount change piece of this, else we are just going to next customer becuase no change is needed.
+'happening in CalcNetSales sub
+
+'mod 6/25/2014
+'have to take gross+ discount (discount should be negative) and use that as the new sales value.
+
+
+
+'open the connection
+F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+Gui.SS_Form1..Show
+
+
+Program.Sub.Main.End
+
+program.sub.cmdupdate_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdupdate_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.local.sMessage.Declare(String)
+V.Local.iret.Declare(Long)
+
+F.Intrinsic.String.Concat("All initial net sales for dates ",V.Screen.SS_Form1!dtpStart.Value," through ",V.Screen.SS_Form1!dtpEnd.Value," will be updated for each customer.  This could impact the customers' discount rate. Continue?",V.Local.sMessage)
+F.Intrinsic.UI.Msgbox(V.Local.smessage,"Attention!",4,V.Local.iRet)
+F.Intrinsic.Control.If(V.Local.iret,=,6)
+'	F.Intrinsic.UI.Msgbox("HERE WE GO!!!!")
+	F.Intrinsic.Control.CallSub(Calculatenetsales)
+F.Intrinsic.Control.Else
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdupdate_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_YE_Sales_Update.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdupdate_click.end
+
+program.sub.ss_form1_unload.start
+'close recordsets, then connection, then end program
+F.ODBC.Connection!conx.CloseRecordsets
+F.ODBC.Connection!Conx.Close
+F.Intrinsic.Control.End
+
+program.sub.ss_form1_unload.end
+
+Program.Sub.CalculateNetSales.Start
+F.Intrinsic.Control.SetErrorHandler("CalculateNetSales_Err")
+F.Intrinsic.Control.ClearErrors
+
+'this subroutine will run for each customer and use the core program created, callwrapper, mode 4100, to calculate the net sales for each customer
+
+'Parameters
+'Customer Number (req)
+'Beg Date (req)
+'End Date (Req)
+
+V.Local.sError.Declare(String)
+V.Local.sParam.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.sBegDate.Declare(String)
+V.Local.sEndDate.Declare(String)
+V.Local.iC.Declare(Long)
+V.Local.sSQL.Declare(String)
+'change flag to signify that we have a disocunt change.
+V.Local.bChangeFlag.Declare(Boolean)
+V.Local.fNewSales.Declare(Float)
+V.Local.fCurrSales.Declare(Float)
+'sRetDisc stores discount from ambient return
+'fRetGross stores gross from abient reutnr
+V.Local.fRetGross.Declare(Float)
+V.Local.fRetDisc.Declare(Float)
+
+
+V.Local.sBegDate.Set(V.Screen.SS_Form1!dtpStart.Value)
+V.Local.sEndDate.Set(V.Screen.SS_Form1!dtpEnd.Value)
+F.Intrinsic.String.Format(V.Local.sBegDate,"YYYYMMDD",V.Local.sBegDate)
+F.Intrinsic.String.Format(V.Local.sEndDate,"YYYYMMDD",V.Local.sEndDate)
+'must get customers from the Customer Master
+F.ODBC.Connection!conx.OpenLocalRecordsetRO("rst","Select Distinct Customer From V_Customer_Master Order By Customer")
+F.Intrinsic.Variable.LoadUDTFromRecordset("conx","rst","v.uglobal.uCustomer",False)
+F.ODBC.conx!rst.Close
+F.Intrinsic.UI.InvokeWaitDialog("Processing Customer Discounts...","Processing")
+'do loop going through each customer found in the udt, calling the callwrapper each time for each customer.
+F.Intrinsic.Control.DoUntil(V.Local.iC,>,V.uGlobal.uCustomer.UBound)
+	F.Intrinsic.UI.ChangeWaitStatus("Processing Customer Discounts...",V.Local.iC,V.uGlobal.uCustomer.LBound,V.uGlobal.uCustomer.UBound)
+	'now each time we are going through this loop, lets see if a customer is already stored within the GCG_DISC_Bales were not found.
+	F.Intrinsic.String.Concat("Select * From GCG_3848_Beg_Sales Where Customer = '",V.uGlobal.uCustomer(v.Local.iC)!Customer,"'",V.Local.sSQL)
+	F.ODBC.Connection!conx.OpenLocalRecordsetRW("rst",V.Local.sSQL)
+	F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,True)
+		V.Local.fCurrSales.Set(0.00)
+		'must add new and pass this to callwrapper mode 4100, with params.
+		F.Intrinsic.String.Concat(V.uGlobal.uCustomer(v.Local.iC)!Customer,"!*!",V.Local.sBegDate,"!*!",V.Local.sEndDate,"!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!",V.Local.sParam)
+		F.Global.General.CallWrapperSync(4100,V.Local.sParam)
+		v.Local.sRet.Set(v.Ambient.CallWrapperReturn)
+		F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+		'sRet(24) stores the GROSS value that we need. We then need to update this information into the table by adding a new record to the GCG_Disc_Beg_Sales
+		F.Intrinsic.String.Split(V.Local.sRet(24),"::",V.Local.fRetGross)
+		F.Intrinsic.String.Split(V.Local.sRet(27),"::",V.Local.fRetDisc)
+		F.Intrinsic.Math.Add(V.Local.fRetGross(1),V.Local.fRetDisc(1),V.Local.fNewSales)
+'		V.Local.fNewSales.Set(V.Local.sRet(1))
+		F.Intrinsic.Control.CallSub(Determineinitpricegroup,"NetSales",V.Local.fNewSales,"Cust",V.uGlobal.uCustomer(v.Local.iC)!Customer)
+		F.ODBC.conx!rst.AddNew
+		F.ODBC.conx!rst.Set!Customer(V.uGlobal.uCustomer(v.Local.iC)!Customer)
+		F.ODBC.conx!rst.Set!Init_Net_Sales(V.Local.fNewSales)
+		F.ODBC.conx!rst.Set!Init_Price_Group(V.Args.InitGroup)
+		F.Intrinsic.Control.If(V.Local.fNewSales,<>,V.Local.fCurrSales)
+			'means that the sales changed
+			V.Local.bChangeFlag.Set(True)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		'means the customer discount beginning net sales were found in table
+		V.local.fCurrSales.Set(V.ODBC.conx!rst.FieldValFloat!Init_Net_Sales)
+		'must add new and pass this to callwrapper mode 4100, with params.
+		F.Intrinsic.String.Concat(V.uGlobal.uCustomer(v.Local.ic)!Customer,"!*!",V.Local.sBegDate,"!*!",V.Local.sEndDate,"!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!",V.Local.sParam)
+		F.Global.General.CallWrapperSync(4100,V.Local.sParam)
+		V.Local.sRet.Set(V.Ambient.callwrapperreturn)
+		F.Intrinsic.string.Split(V.Local.sRet,"*!*",V.Local.sRet)
+		'sRet(24) stores the GROSS value that we need. We then need to update this information into the table by adding a new record to the GCG_Disc_Beg_Sales
+		F.Intrinsic.String.Split(V.Local.sRet(24),"::",V.Local.fRetGross)
+		F.Intrinsic.String.Split(V.Local.sRet(27),"::",V.Local.fRetDisc)
+		F.Intrinsic.Math.Add(V.Local.fRetGross(1),V.Local.fRetDisc(1),V.Local.fNewSaleS)
+'		V.Local.fNewSales.Set(V.Local.sRet(1))
+		F.Intrinsic.Control.CallSub(Determineinitpricegroup,"NetSales",V.Local.fNewSales,"Cust",V.uGlobal.uCustomer(v.Local.iC)!Customer)
+		F.ODBC.conx!rst.Set!Init_Net_Sales(V.Local.fNewSales)
+		F.ODBC.conx!rst.Set!Init_Price_Group(V.Args.InitGroup)
+		F.Intrinsic.Control.If(V.Local.fNewSales,<>,V.Local.fCurrSales)
+			'means that the sales changed
+			V.Local.bChangeFlag.Set(True)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+	F.ODBC.conx!rst.Update
+	F.ODBC.conx!rst.Close
+	F.Intrinsic.Control.If(V.local.bChangeFlag,=,True)
+		F.Intrinsic.Control.CallSub(Discountchange,"Customer",V.uGlobal.uCustomer(v.Local.iC)!Customer)
+	F.Intrinsic.Control.EndIf
+	F.Intrinsic.Math.Add(V.Local.iC,1,V.Local.iC)
+	'reset our change flag.
+	V.Local.bChangeFlag.Set(False)
+F.Intrinsic.Control.Loop
+F.Intrinsic.UI.CloseWaitDialog
+
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.Label("CalculateNetSales_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_YE_Sales_Update.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.CalculateNetSales.End
+
+Program.Sub.DiscountChange.Start
+F.Intrinsic.Control.SetErrorHandler("DiscountChange_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'this subroutine will be calling module 4110, for both quotes and orders
+'this will call the program notifying that a discount change has occured for the customer.
+'do this for both quotes and orders
+'argument passed from subroutine will be the customer
+
+
+V.Local.sParam.Declare(String)
+
+F.Intrinsic.String.Concat("Q!*!",V.Args.Customer,"!*!",V.Local.sParam)
+F.Global.General.CallWrapperSync(4110,V.Local.sParam)
+
+'replace Q with O for the Orders
+F.Intrinsic.String.Concat("O!*!",V.Args.Customer,"!*!",V.Local.sParam)
+F.Global.General.CallWrapperSync(4110,V.Local.sParam)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("DiscountChange_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_YE_Sales_Update.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.DiscountChange.End
+
+Program.Sub.DetermineInitPriceGroup.Start
+F.Intrinsic.Control.SetErrorHandler("DetermineInitPriceGroup_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'sub that will be fired
+'uses the net sales that was returned to us from the Callwrapper
+'we are going to look in the GCG_disc_Cust table whose key matches the type of the customer coming from code sort field in customer_sales table
+'then we are going to use the net sales versus the min net sales to determine which price group we are going to update to.
+'args are going to be
+'NetSales
+'Cust
+
+
+V.Local.fNetSales.Declare(Float)
+V.Local.sSQL.Declare(String)
+V.Local.sType.Declare(String)
+V.Local.sCust.Declare(String)
+V.Local.sInitGroup.Declare(String)
+V.Local.sCust.Set(V.Args.Cust)
+V.Local.fNetSales.Set(V.Args.NetSales)
+
+
+'first we need to find out what the customer type i
+F.Intrinsic.String.Concat("Select C_Sort_1 From V_Customer_Sales Where Customer = '",V.Local.sCust.Trim,"'",V.Local.sSQL)
+F.ODBC.Connection!conx.OpenLocalRecordsetRO("Rst",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,True)
+	F.ODBC.conx!rst.Close
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.else
+	'meaning we found something so lets use it
+	V.Local.sType.Set(V.ODBC.conx!rst.FieldValTrim!c_Sort_1)
+	F.ODBC.conx!rst.Close
+	'then we have to use this and figure out what we need to pull in for the initial sales group.
+	F.Intrinsic.String.Concat("Select Price_Group, Min_Net_Sales From GCG_3848_Disc_Cust Where Customer_Type = '",V.Local.sType.Trim,"' Order By Min_Net_Sales",V.Local.sSQL)
+	F.ODBC.Connection!conx.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+	F.Intrinsic.Control.DoUntil(V.ODBC.conx!rst.EOF,=,True)
+		F.Intrinsic.Control.If(V.Local.fNetSales,>=,V.ODBC.conx!rst.FieldValFloat!Min_Net_Sales)
+			V.Local.sInitGroup.Set(V.ODBC.conx!rst.FieldValTrim!Price_Group)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.conx!rst.MoveNext
+	F.Intrinsic.Control.Loop
+	F.ODBC.conx!rst.Close
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Variable.AddRV("InitGroup",V.Local.sInitGroup)
+
+	
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("DetermineInitPriceGroup_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_YE_Sales_Update.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.DetermineInitPriceGroup.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_YE_Sales_Update$}$SUPERVSR$}$2/22/2013
+Program.Sub.Comments.End
+Program.Sub.ScreenSS.Start
+SS_Form1{{CAPTION::Update Customer Initial Sales
+SS_Form1.CTRL{{NAME::dtpStart\\TYPE::6\\CAPTION::Beginning Date\\GROUP::1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::dtpEnd\\TYPE::6\\CAPTION::Ending Date\\GROUP::1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::cmdUpdate\\TYPE::5\\CAPTION::Update\\GROUP::-1\\BROWSER::0\\SIZE::1
+
+Program.Sub.ScreenSS.End
+
