@@ -1,0 +1,1018 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form1..create
+gui.SS_Form1..caption("Discount Type Maintenance")
+gui.SS_Form1..size(7530,9870)
+gui.SS_Form1..minx(0)
+gui.SS_Form1..miny(0)
+gui.SS_Form1..position(100,0)
+gui.SS_Form1..event(unload,ss_form1_unload)
+gui.SS_Form1..alwaysontop(False)
+gui.SS_Form1..fontname("Arial")
+gui.SS_Form1..fontsize(8)
+gui.SS_Form1..forecolor(0)
+gui.SS_Form1..fontstyle(,,,,)
+gui.SS_Form1..BackColor(-2147483633)
+gui.SS_Form1..controlbox(True)
+gui.SS_Form1..maxbutton(False)
+gui.SS_Form1..minbutton(False)
+gui.SS_Form1..mousepointer(0)
+gui.SS_Form1..moveable(True)
+gui.SS_Form1..sizeable(False)
+gui.SS_Form1..ShowInTaskBar(True)
+gui.SS_Form1..titlebar(True)
+gui.SS_Form1.tabx1.create(tab)
+gui.SS_Form1.tabx1.tabs(4)
+gui.SS_Form1.tabx1.tabsperrow(4)
+gui.SS_Form1.tabx1.settab(0)
+gui.SS_Form1.tabx1.caption("Types")
+gui.SS_Form1.tabx1.settab(1)
+gui.SS_Form1.tabx1.caption("Groups")
+gui.SS_Form1.tabx1.settab(2)
+gui.SS_Form1.tabx1.caption("Categories")
+gui.SS_Form1.tabx1.settab(3)
+gui.SS_Form1.tabx1.caption("Codes")
+gui.SS_Form1.tabx1.size(6960,8985)
+gui.SS_Form1.tabx1.position(160,200)
+gui.SS_Form1.tabx1.visible(True)
+gui.SS_Form1.tabx1.fontname("Arial")
+gui.SS_Form1.tabx1.fontsize(8)
+gui.SS_Form1.fr_Types.create(frame)
+gui.SS_Form1.fr_Types.caption("")
+gui.SS_Form1.fr_Types.parent("tabx1",0)
+gui.SS_Form1.fr_Types.size(6645,8430)
+gui.SS_Form1.fr_Types.position(150,40)
+gui.SS_Form1.fr_Types.visible(True)
+gui.SS_Form1.fr_Types.fontname("Arial")
+gui.SS_Form1.fr_Types.fontsize(8)
+gui.SS_Form1.frGroups.create(frame)
+gui.SS_Form1.frGroups.caption("")
+gui.SS_Form1.frGroups.parent("tabx1",1)
+gui.SS_Form1.frGroups.size(6630,8460)
+gui.SS_Form1.frGroups.position(150,40)
+gui.SS_Form1.frGroups.visible(True)
+gui.SS_Form1.frGroups.fontname("Arial")
+gui.SS_Form1.frGroups.fontsize(8)
+gui.SS_Form1.frCategory.create(frame)
+gui.SS_Form1.frCategory.caption("")
+gui.SS_Form1.frCategory.parent("tabx1",2)
+gui.SS_Form1.frCategory.size(6570,8415)
+gui.SS_Form1.frCategory.position(150,25)
+gui.SS_Form1.frCategory.visible(True)
+gui.SS_Form1.frCategory.fontname("Arial")
+gui.SS_Form1.frCategory.fontsize(8)
+gui.SS_Form1.frCodes.create(frame)
+gui.SS_Form1.frCodes.caption("")
+gui.SS_Form1.frCodes.parent("tabx1",3)
+gui.SS_Form1.frCodes.size(6675,8355)
+gui.SS_Form1.frCodes.position(150,40)
+gui.SS_Form1.frCodes.visible(True)
+gui.SS_Form1.frCodes.fontname("Arial")
+gui.SS_Form1.frCodes.fontsize(8)
+gui.SS_Form1.lbl_txtType.create(label,"Customer Type",True,1800,200,1,100,290,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtType.parent("fr_types")
+gui.SS_Form1.lbl_txtType.defaultvalue("")
+gui.SS_Form1.lbl_txtType.controlgroup(0)
+gui.SS_Form1.txtType.create(textbox,"",True,3600,330,0,100,500,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtType.parent("fr_types")
+gui.SS_Form1.txtType.defaultvalue("")
+gui.SS_Form1.txtType.controlgroup(0)
+gui.SS_Form1.cmdType.create(button)
+gui.SS_Form1.cmdType.caption("Add")
+gui.SS_Form1.cmdType.visible(True)
+gui.SS_Form1.cmdType.size(1000,360)
+gui.SS_Form1.cmdType.zorder(0)
+gui.SS_Form1.cmdType.position(3890,500)
+gui.SS_Form1.cmdType.enabled(True)
+gui.SS_Form1.cmdType.parent("fr_types")
+gui.SS_Form1.cmdType.fontname("Arial")
+gui.SS_Form1.cmdType.fontsize(8)
+gui.SS_Form1.cmdType.event(click,cmdtype_click)
+gui.SS_Form1.cmdType.defaultvalue("")
+gui.SS_Form1.cmdType.controlgroup(0)
+gui.SS_Form1.lbl_txtGroup.create(label,"Price Group",True,1800,200,1,100,290,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtGroup.parent("frgroups")
+gui.SS_Form1.lbl_txtGroup.defaultvalue("")
+gui.SS_Form1.lbl_txtGroup.controlgroup(0)
+gui.SS_Form1.txtGroup.create(textbox,"",True,3135,330,0,100,500,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtGroup.parent("frgroups")
+gui.SS_Form1.txtGroup.defaultvalue("")
+gui.SS_Form1.txtGroup.controlgroup(0)
+gui.SS_Form1.cmdGroup.create(button)
+gui.SS_Form1.cmdGroup.caption("Add")
+gui.SS_Form1.cmdGroup.visible(True)
+gui.SS_Form1.cmdGroup.size(1000,360)
+gui.SS_Form1.cmdGroup.zorder(0)
+gui.SS_Form1.cmdGroup.position(5165,485)
+gui.SS_Form1.cmdGroup.enabled(True)
+gui.SS_Form1.cmdGroup.parent("frgroups")
+gui.SS_Form1.cmdGroup.fontname("Arial")
+gui.SS_Form1.cmdGroup.fontsize(8)
+gui.SS_Form1.cmdGroup.event(click,cmdgroup_click)
+gui.SS_Form1.cmdGroup.defaultvalue("")
+gui.SS_Form1.cmdGroup.controlgroup(0)
+gui.SS_Form1.lbl_txtCat.create(label,"Price Category",True,1800,200,1,100,290,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtCat.parent("frcategory")
+gui.SS_Form1.lbl_txtCat.defaultvalue("")
+gui.SS_Form1.lbl_txtCat.controlgroup(0)
+gui.SS_Form1.txtCat.create(textbox,"",True,3600,330,0,100,500,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtCat.parent("frcategory")
+gui.SS_Form1.txtCat.defaultvalue("")
+gui.SS_Form1.txtCat.controlgroup(0)
+gui.SS_Form1.cmdCat.create(button)
+gui.SS_Form1.cmdCat.caption("Add")
+gui.SS_Form1.cmdCat.visible(True)
+gui.SS_Form1.cmdCat.size(1000,360)
+gui.SS_Form1.cmdCat.zorder(0)
+gui.SS_Form1.cmdCat.position(3890,500)
+gui.SS_Form1.cmdCat.enabled(True)
+gui.SS_Form1.cmdCat.parent("frcategory")
+gui.SS_Form1.cmdCat.fontname("Arial")
+gui.SS_Form1.cmdCat.fontsize(8)
+gui.SS_Form1.cmdCat.event(click,cmdcat_click)
+gui.SS_Form1.cmdCat.defaultvalue("")
+gui.SS_Form1.cmdCat.controlgroup(0)
+gui.SS_Form1.lbl_txtCode.create(label,"Discount Code",True,1800,200,1,100,290,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtCode.parent("frcodes")
+gui.SS_Form1.lbl_txtCode.defaultvalue("")
+gui.SS_Form1.lbl_txtCode.controlgroup(0)
+gui.SS_Form1.txtCode.create(textbox,"",True,3600,330,0,100,500,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtCode.parent("frcodes")
+gui.SS_Form1.txtCode.defaultvalue("")
+gui.SS_Form1.txtCode.controlgroup(0)
+gui.SS_Form1.lbl_txtCodePercent.create(label,"Discount %",True,1380,200,1,3825,290,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtCodePercent.parent("frcodes")
+gui.SS_Form1.lbl_txtCodePercent.defaultvalue("")
+gui.SS_Form1.lbl_txtCodePercent.controlgroup(0)
+gui.SS_Form1.txtCodePercent.create(textbox,"",True,1095,330,0,3825,500,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtCodePercent.parent("frcodes")
+gui.SS_Form1.txtCodePercent.numericonly(1)
+gui.SS_Form1.txtCodePercent.defaultvalue("")
+gui.SS_Form1.txtCodePercent.controlgroup(0)
+gui.SS_Form1.cmdCode.create(button)
+gui.SS_Form1.cmdCode.caption("Add")
+gui.SS_Form1.cmdCode.visible(True)
+gui.SS_Form1.cmdCode.size(1000,360)
+gui.SS_Form1.cmdCode.zorder(0)
+gui.SS_Form1.cmdCode.position(3875,995)
+gui.SS_Form1.cmdCode.enabled(True)
+gui.SS_Form1.cmdCode.parent("frcodes")
+gui.SS_Form1.cmdCode.fontname("Arial")
+gui.SS_Form1.cmdCode.fontsize(8)
+gui.SS_Form1.cmdCode.event(click,cmdcode_click)
+gui.SS_Form1.cmdCode.defaultvalue("")
+gui.SS_Form1.cmdCode.controlgroup(0)
+gui.SS_Form1.gsflexgridType.create(gsflexgrid)
+gui.SS_Form1.gsflexgridType.FixedRows(0)
+gui.SS_Form1.gsflexgridType.FixedCols(0)
+gui.SS_Form1.gsflexgridType.visible(True)
+gui.SS_Form1.gsflexgridType.size(6395,7295)
+gui.SS_Form1.gsflexgridType.zorder(0)
+gui.SS_Form1.gsflexgridType.position(100,1000)
+gui.SS_Form1.gsflexgridType.enabled(True)
+gui.SS_Form1.gsflexgridType.parent("fr_types")
+gui.SS_Form1.gsflexgridType.event(commandclick,gsflexgridtype_commandclick)
+gui.SS_Form1.gsflexgridGroups.create(gsflexgrid)
+gui.SS_Form1.gsflexgridGroups.FixedRows(0)
+gui.SS_Form1.gsflexgridGroups.FixedCols(0)
+gui.SS_Form1.gsflexgridGroups.visible(True)
+gui.SS_Form1.gsflexgridGroups.size(6395,7235)
+gui.SS_Form1.gsflexgridGroups.zorder(0)
+gui.SS_Form1.gsflexgridGroups.position(100,1000)
+gui.SS_Form1.gsflexgridGroups.enabled(True)
+gui.SS_Form1.gsflexgridGroups.parent("frgroups")
+gui.SS_Form1.gsflexgridGroups.event(commandclick,gsflexgridgroups_commandclick)
+gui.SS_Form1.gsflexgridCat.create(gsflexgrid)
+gui.SS_Form1.gsflexgridCat.FixedRows(0)
+gui.SS_Form1.gsflexgridCat.FixedCols(0)
+gui.SS_Form1.gsflexgridCat.visible(True)
+gui.SS_Form1.gsflexgridCat.size(6245,7190)
+gui.SS_Form1.gsflexgridCat.zorder(0)
+gui.SS_Form1.gsflexgridCat.position(100,1000)
+gui.SS_Form1.gsflexgridCat.enabled(True)
+gui.SS_Form1.gsflexgridCat.parent("frcategory")
+gui.SS_Form1.gsflexgridCat.event(commandclick,gsflexgridcat_commandclick)
+gui.SS_Form1.gsflexgridCodes.create(gsflexgrid)
+gui.SS_Form1.gsflexgridCodes.FixedRows(0)
+gui.SS_Form1.gsflexgridCodes.FixedCols(0)
+gui.SS_Form1.gsflexgridCodes.visible(True)
+gui.SS_Form1.gsflexgridCodes.size(6455,6590)
+gui.SS_Form1.gsflexgridCodes.zorder(0)
+gui.SS_Form1.gsflexgridCodes.position(100,1540)
+gui.SS_Form1.gsflexgridCodes.enabled(True)
+gui.SS_Form1.gsflexgridCodes.parent("frcodes")
+gui.SS_Form1.gsflexgridCodes.event(commandclick,gsflexgridcodes_commandclick)
+gui.SS_Form1.txtMinNetSales.create(textbox,"",True,1695,300,0,3380,500,True,0,Arial,8,-2147483643,1)
+gui.SS_Form1.txtMinNetSales.parent("frgroups")
+gui.SS_Form1.txtMinNetSales.numericonly(2)
+gui.SS_Form1.txtMinNetSales.maxLength(9)
+gui.SS_Form1.txtMinNetSales.defaultvalue("")
+gui.SS_Form1.txtMinNetSales.controlgroup(0)
+gui.SS_Form1.lblMinNetSales.create(label,"Min. Net Sales",True,1935,255,1,3385,290,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lblMinNetSales.parent("frgroups")
+gui.SS_Form1.lblMinNetSales.defaultvalue("")
+gui.SS_Form1.lblMinNetSales.controlgroup(0)
+gui.SS_Form1.txtEff_Disc.create(textbox,"",True,3600,300,0,90,1045,True,0,Arial,8,-2147483643,1)
+gui.SS_Form1.txtEff_Disc.parent("frcodes")
+gui.SS_Form1.txtEff_Disc.maxLength(30)
+gui.SS_Form1.txtEff_Disc.defaultvalue("")
+gui.SS_Form1.txtEff_Disc.controlgroup(0)
+gui.SS_Form1.lbl7.create(label,"Effective Discount",True,1935,255,1,125,860,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl7.parent("frcodes")
+gui.SS_Form1.lbl7.defaultvalue("")
+gui.SS_Form1.lbl7.controlgroup(0)
+gui.SS_Form1.txtType.tabstop(True)
+gui.SS_Form1.txtType.tabindex(1)
+gui.SS_Form1.cmdType.tabstop(True)
+gui.SS_Form1.cmdType.tabindex(2)
+gui.SS_Form1.txtGroup.tabstop(True)
+gui.SS_Form1.txtGroup.tabindex(3)
+gui.SS_Form1.txtMinNetSales.tabstop(True)
+gui.SS_Form1.txtMinNetSales.tabindex(4)
+gui.SS_Form1.cmdGroup.tabstop(True)
+gui.SS_Form1.cmdGroup.tabindex(5)
+gui.SS_Form1.txtCat.tabstop(True)
+gui.SS_Form1.txtCat.tabindex(6)
+gui.SS_Form1.cmdCat.tabstop(True)
+gui.SS_Form1.cmdCat.tabindex(7)
+gui.SS_Form1.txtCode.tabstop(True)
+gui.SS_Form1.txtCode.tabindex(8)
+gui.SS_Form1.txtCodePercent.tabstop(True)
+gui.SS_Form1.txtCodePercent.tabindex(9)
+gui.SS_Form1.txtEff_Disc.tabstop(True)
+gui.SS_Form1.txtEff_Disc.tabindex(10)
+gui.SS_Form1.cmdCode.tabstop(True)
+gui.SS_Form1.cmdCode.tabindex(11)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+
+'revised script version
+'modified by Tyler T.
+'8/1/2013
+'Changes-Sort of flexgrid queries changed to name instead of ID.
+'Percent value under codes tab was changed to signed float property
+'Set Focus command used on all text boxes that will fire after a user has clicked add.
+
+
+'Quote 5042
+'modificaitons made by TRT
+
+V.Local.sError.Declare(String)
+F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+F.Intrinsic.Control.CallSub(Flexgrid)
+F.Intrinsic.Control.CallSub(Flexpop)
+Gui.SS_Form1.tabx1.SetTab(0)
+Gui.SS_Form1..Show
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Type.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+program.sub.ss_form1_unload.start
+F.ODBC.Connection!con.Close
+F.Intrinsic.Control.End
+
+program.sub.ss_form1_unload.end
+
+program.sub.cmdtype_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdtype_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSql.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.iRet.Declare(Long)
+
+V.Local.sRet.Set(V.Screen.SS_Form1!txtType.Text)
+F.Intrinsic.Control.If(V.Local.sRet.Trim,=,"")
+	F.Intrinsic.UI.Msgbox("Please enter a Customer Type.","Error")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Concat("Select * From GCG_3848_Disc_Type Where Customer_Type = '",V.Local.sRet.Trim,"'",V.Local.sSql)
+F.ODBC.Connection!con.OpenRecordsetRW("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	F.Intrinsic.UI.Msgbox("Customer Type already exists.","Error")
+	F.ODBC.con!rst.Close
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Else
+	f.ODBC.Connection!con.GetID("GCG_3848_Disc_Type","REC_ID",True,v.Local.iRet)
+	F.ODBC.con!rst.AddNew
+	F.ODBC.con!rst.Set!Rec_ID(V.Local.iRet.Trim)
+	F.ODBC.con!rst.Set!Customer_Type(V.Local.sRet.Trim)
+	F.ODBC.con!rst.Update
+	Gui.SS_Form1.txtType.Text("")
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Close
+F.Intrinsic.Control.CallSub(Flexpop)
+Gui.SS_Form1.txtType.SetFocus
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdtype_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Type.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdtype_click.end
+
+program.sub.cmdclass_click.start
+
+'commented out
+'this subroutine is no longer needed as the classes tab will be entirely removed
+
+
+
+'F.Intrinsic.Control.SetErrorHandler("cmdclass_click_Err")
+'F.Intrinsic.Control.ClearErrors
+'
+'V.Local.sError.Declare(String)
+'V.Local.sSql.Declare(String)
+'V.Local.sRet.Declare(String)
+'V.Local.iRet.Declare(Long)
+'
+'V.Local.sRet.Set(V.Screen.SS_Form1!txtClass.Text)
+'F.Intrinsic.Control.If(V.Local.sRet.Trim,=,"")
+'	F.Intrinsic.UI.Msgbox("Please enter a Customer Class.","Error")
+'	F.Intrinsic.Control.ExitSub
+'F.Intrinsic.Control.EndIf
+'
+'F.Intrinsic.String.Concat("Select * From GCG_3848_Disc_Class Where Customer_Class = '",V.Local.sRet.Trim,"'",V.Local.sSql)
+'F.ODBC.Connection!con.OpenRecordsetRW("rst",V.Local.sSql)
+'F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+'	F.Intrinsic.UI.Msgbox("Customer Class already exists.","Error")
+'	F.ODBC.con!rst.Close
+'	F.Intrinsic.Control.ExitSub
+'F.Intrinsic.Control.Else
+'	f.ODBC.Connection!con.GetID("GCG_3848_Disc_Class","REC_ID",True,v.Local.iRet)
+'	F.ODBC.con!rst.AddNew
+'	F.ODBC.con!rst.Set!Rec_ID(V.Local.iRet.Trim)
+'	F.ODBC.con!rst.Set!Customer_Class(V.Local.sRet.Trim)
+'	F.ODBC.con!rst.Update
+'	Gui.SS_Form1.txtClass.Text("")
+'F.Intrinsic.Control.EndIf
+'F.ODBC.con!rst.Close
+'F.Intrinsic.Control.CallSub(Flexpop)
+'Gui.SS_Form1.txtclass.SetFocus
+'
+'F.Intrinsic.Control.ExitSub
+'
+'F.Intrinsic.Control.Label("cmdclass_click_Err")
+'F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+'	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Type.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+'	F.Intrinsic.UI.Msgbox(V.Local.sError)
+'	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+'Function.Intrinsic.Control.EndIf
+'
+program.sub.cmdclass_click.end
+
+program.sub.cmdgroup_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdgroup_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSql.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.iRet.Declare(Long)
+V.Local.sMsg.Declare(String)
+V.Local.sMinNetSales.Declare(String)
+
+V.Local.sRet.Set(V.Screen.SS_Form1!txtGroup.Text)
+F.Intrinsic.Control.If(V.Local.sRet.Trim,=,"")
+	F.Intrinsic.UI.Msgbox("Please enter a Price Group.","Error")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+'need to check the min net sales value entered
+V.Local.sMinNetSales.Set(V.Screen.SS_Form1!txtMinNetSales.Text)
+F.Intrinsic.Control.If(V.Local.sMinNetSales.Trim,=,"")
+	F.Intrinsic.UI.Msgbox("Please enter a Min. Net Sales value.","Error")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+'had to add a field to the GCG_Disc_Group table to store this Min_Net_Sales Value
+F.Intrinsic.String.Concat("Select * From GCG_3848_Disc_Group Where Price_Group = '",V.Local.sRet.Trim,"'",V.Local.sSql)
+F.ODBC.Connection!con.OpenRecordsetRW("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	'edit by TRT, why not just update the record if it already exists
+	'no way it will be created twice it will just update.
+'	F.Intrinsic.String.Concat("Price Group: ",V.Local.sRet.Trim," already exists.",V.Local.sMsg)
+'	F.Intrinsic.UI.Msgbox(V.Local.sMsg,"Error")
+	'update the record to what it needs to be?
+	F.ODBC.con!rst.Set!Min_Net_Sales(V.Screen.SS_Form1!txtMinNetSales.Text)
+	F.ODBC.con!rst.Update
+'	F.ODBC.con!rst.Close
+'	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Else
+	f.ODBC.Connection!con.GetID("GCG_3848_Disc_Group","REC_ID",True,v.Local.iRet)
+	F.ODBC.con!rst.AddNew
+	F.ODBC.con!rst.Set!Rec_ID(V.Local.iRet.Trim)
+	F.ODBC.con!rst.Set!Price_Group(V.Local.sRet.Trim)
+	F.ODBC.con!rst.Set!Min_Net_Sales(V.Local.sMinNetSales.Trim)
+	F.ODBC.con!rst.Update
+F.Intrinsic.Control.EndIf
+Gui.SS_Form1.txtGroup.Text("")
+Gui.SS_Form1.txtMinNetSales.Text("")
+F.ODBC.con!rst.Close
+'added by TRT
+'now we have to update all min net sales value from the GCG_DIsc_Cust table, where the group is equal to what is above.
+'sret stores the price group they have entered.
+F.Intrinsic.String.Build("Update GCG_3848_Disc_Cust Set Min_Net_Sales = '{0}'  Where Price_Group = '{1}'",V.Local.sMinNetSales.Trim,V.Local.sRet.Trim,V.local.sSql)
+F.ODBC.Connection!con.Execute(V.Local.sSql)
+
+F.Intrinsic.Control.CallSub(Flexpop)
+Gui.SS_Form1.txtGroup.SetFocus
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdgroup_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Type.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdgroup_click.end
+
+program.sub.cmdcat_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdcat_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSql.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.iRet.Declare(Long)
+
+V.Local.sRet.Set(V.Screen.SS_Form1!txtCat.Text)
+F.Intrinsic.Control.If(V.Local.sRet.Trim,=,"")
+	F.Intrinsic.UI.Msgbox("Please enter a Price Category.","Error")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Concat("Select * From GCG_3848_Disc_Cat Where Price_Cat = '",V.Local.sRet.Trim,"'",V.Local.sSql)
+F.ODBC.Connection!con.OpenRecordsetRW("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	F.Intrinsic.UI.Msgbox("Price Category already exists.","Error")
+	F.ODBC.con!rst.Close
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Else
+	f.ODBC.Connection!con.GetID("GCG_3848_Disc_Cat","REC_ID",True,v.Local.iRet)
+	F.ODBC.con!rst.AddNew
+	F.ODBC.con!rst.Set!Rec_ID(V.Local.iRet.Trim)
+	F.ODBC.con!rst.Set!Price_Cat(V.Local.sRet.Trim)
+	F.ODBC.con!rst.Update
+	Gui.SS_Form1.txtCat.Text("")
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Close
+F.Intrinsic.Control.CallSub(Flexpop)
+Gui.SS_Form1.txtCat.SetFocus
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdcat_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Type.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdcat_click.end
+
+program.sub.cmdcode_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdcode_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSql.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.iRet.Declare(Long)
+V.Local.sReturn.Declare(String)
+V.Local.sEffDisc.Declare(String)
+
+
+
+V.Local.sRet.Set(V.Screen.SS_Form1!txtCode.Text)
+V.Local.sReturn.Set(V.Screen.SS_Form1!txtCodePercent.Text)
+'Edit by TRT 10/24/13
+'effective discount text set to it
+V.Local.sEffDisc.Set(V.Screen.SS_Form1!txtEff_Disc.Text)
+
+F.Intrinsic.Control.If(V.Local.sRet.Trim,=,"")
+	F.Intrinsic.UI.Msgbox("Please enter a Discount Code.","Error")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Else
+	F.Intrinsic.Control.If(V.Local.sReturn,=,"")
+		F.Intrinsic.UI.Msgbox("Please enter a Discount %.","Error")
+		F.Intrinsic.Control.ExitSub
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Concat("Select * From GCG_3848_Disc_Code Where Disc_Code = '",V.Local.sRet.Trim,"'",V.Local.sSql)
+F.ODBC.Connection!con.OpenRecordsetRW("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	F.Intrinsic.UI.Msgbox("Discount Code already exists.","Error")
+	F.ODBC.con!rst.Close
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Else
+	f.ODBC.Connection!con.GetID("GCG_3848_Disc_Code","REC_ID",True,v.Local.iRet)
+	F.ODBC.con!rst.AddNew
+	F.ODBC.con!rst.Set!Rec_ID(V.Local.iRet.Trim)
+	F.ODBC.con!rst.Set!Disc_Code(V.Local.sRet.Trim)
+	'edit by TRT, round the number to four decimal places, if for some reason more is entered.  'CORE screen will round it, avoids confusion.
+	F.Intrinsic.String.Format(V.Local.sReturn,"0.0000",V.Local.sReturn)
+	F.ODBC.con!rst.Set!Disc_Percent(V.Local.sReturn.Trim)
+'Edit by TRT 10/24/13
+	F.ODBC.con!rst.Set!Effective_Discount(V.local.sEffDisc.Trim)
+	F.ODBC.con!rst.Update
+	Gui.SS_Form1.txtCode.Text("")
+	Gui.SS_Form1.txtCodePercent.Text("")
+'Edit by TRT 10/24/13
+	Gui.SS_Form1.txtEff_Disc.Text("")
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Close
+F.Intrinsic.Control.CallSub(Flexpop)
+Gui.SS_Form1.txtCode.SetFocus
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdcode_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Type.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdcode_click.end
+
+program.sub.gsflexgridtype_commandclick.start
+F.Intrinsic.Control.SetErrorHandler("gsflexgridtype_commandclick_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iRow.Declare(Long)
+V.Local.sRecID.Declare(String)
+V.Local.sSql.Declare(String)
+
+'Delete row from flexgrid and table
+Gui.SS_Form1.gsflexgridType.GetTextMatrix(0,V.Args.Key,V.Local.sRecID)
+F.Intrinsic.Math.Sub(V.Args.Key,1,V.Local.iRow)
+Gui.SS_Form1.gsflexgridType.DeleteRow(V.Local.iRow)
+F.Intrinsic.String.Concat("Select * From GCG_3848_Disc_Type Where REC_ID = '",V.Local.sRecID,"'",V.Local.sSql)
+F.ODBC.Connection!con.OpenRecordsetRW("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	F.ODBC.con!rst.Delete
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Close
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("gsflexgridtype_commandclick_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Type.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.gsflexgridtype_commandclick.end
+
+program.sub.gsflexgridclass_commandclick.start
+F.Intrinsic.Control.SetErrorHandler("gsflexgridclass_commandclick_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iRow.Declare(Long)
+V.Local.sRecID.Declare(String)
+V.Local.sSql.Declare(String)
+
+'Delete row from flexgrid and table
+Gui.SS_Form1.gsflexgridClass.GetTextMatrix(0,V.Args.Key,V.Local.sRecID)
+F.Intrinsic.Math.Sub(V.Args.Key,1,V.Local.iRow)
+Gui.SS_Form1.gsflexgridClass.DeleteRow(v.Local.iRow)
+F.Intrinsic.String.Concat("Select * From GCG_3848_Disc_Class Where REC_ID = '",V.Local.sRecID,"'",V.Local.sSql)
+F.ODBC.Connection!con.OpenRecordsetRW("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	F.ODBC.con!rst.Delete
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Close
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("gsflexgridclass_commandclick_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Type.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.gsflexgridclass_commandclick.end
+
+program.sub.gsflexgridgroups_commandclick.start
+F.Intrinsic.Control.SetErrorHandler("gsflexgridgroups_commandclick_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iRow.Declare(Long)
+V.Local.sRecID.Declare(String)
+V.Local.sSql.Declare(String)
+
+'Delete row from flexgrid and table
+Gui.SS_Form1.gsflexgridGroups.GetTextMatrix(0,V.Args.Key,V.Local.sRecID)
+F.Intrinsic.Math.Sub(V.Args.Key,1,V.Local.iRow)
+Gui.SS_Form1.gsflexgridGroups.DeleteRow(V.Local.iRow)
+F.Intrinsic.String.Concat("Select * From GCG_3848_Disc_Group Where REC_ID = '",V.Local.sRecID,"'",V.Local.sSql)
+F.ODBC.Connection!con.OpenRecordsetRW("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	F.ODBC.con!rst.Delete
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Close
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("gsflexgridgroups_commandclick_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Type.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.gsflexgridgroups_commandclick.end
+
+program.sub.gsflexgridcat_commandclick.start
+F.Intrinsic.Control.SetErrorHandler("gsflexgridcat_commandclick_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iRow.Declare(Long)
+V.Local.sRecID.Declare(String)
+V.Local.sSql.Declare(String)
+
+'Delete row from flexgrid and table
+Gui.SS_Form1.gsflexgridCat.GetTextMatrix(0,V.Args.Key,V.Local.sRecID)
+F.Intrinsic.Math.Sub(V.Args.Key,1,V.Local.iRow)
+Gui.SS_Form1.gsflexgridCat.DeleteRow(V.Local.iRow)
+F.Intrinsic.String.Concat("Select * From GCG_3848_Disc_Cat Where REC_ID = '",V.Local.sRecID,"'",V.Local.sSql)
+F.ODBC.Connection!con.OpenRecordsetRW("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	F.ODBC.con!rst.Delete
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Close
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("gsflexgridcat_commandclick_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Type.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.gsflexgridcat_commandclick.end
+
+program.sub.gsflexgridcodes_commandclick.start
+F.Intrinsic.Control.SetErrorHandler("gsflexgridcodes_commandclick_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iRow.Declare(Long)
+V.Local.sRecID.Declare(String)
+V.Local.sSql.Declare(String)
+
+'Delete row from flexgrid and table
+Gui.SS_Form1.gsflexgridCodes.GetTextMatrix(0,V.Args.Key,V.Local.sRecID)
+F.Intrinsic.Math.Sub(V.Args.Key,1,V.Local.iRow)
+Gui.SS_Form1.gsflexgridCodes.DeleteRow(V.Local.iRow)
+F.Intrinsic.String.Concat("Select * From GCG_3848_Disc_Code Where REC_ID = '",V.Local.sRecID,"'",V.Local.sSql)
+F.ODBC.Connection!con.OpenRecordsetRW("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	F.ODBC.con!rst.Delete
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Close
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("gsflexgridcodes_commandclick_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Type.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.gsflexgridcodes_commandclick.end
+
+Program.Sub.FlexGrid.Start
+V.Local.iC.Declare(Long)
+
+'Customer Type
+Gui.SS_Form1.gsflexgridType.Rows(2)
+Gui.SS_Form1.gsflexgridType.FixedRows(1)
+Gui.SS_Form1.gsflexgridType.Cols(3)
+Gui.SS_Form1.gsflexgridType.TextMatrix(0,0,"Rec ID")
+Gui.SS_Form1.gsflexgridType.TextMatrix(1,0,"Customer Type")
+Gui.SS_Form1.gsflexgridType.TextMatrix(2,0,"")
+Gui.SS_Form1.gsflexgridType.ColWidth(0,"0")
+Gui.SS_Form1.gsflexgridType.ColWidth(1,"3500")
+Gui.SS_Form1.gsflexgridType.ColWidth(2,"2000")
+
+'commented out by TRT 10/24/13
+'no longer needed this class criteria
+''Customer Class
+'Gui.SS_Form1.gsflexgridClass.Rows(2)
+'Gui.SS_Form1.gsflexgridClass.FixedRows(1)
+'Gui.SS_Form1.gsflexgridClass.Cols(3)
+'Gui.SS_Form1.gsflexgridClass.TextMatrix(0,0,"Rec ID")
+'Gui.SS_Form1.gsflexgridClass.TextMatrix(1,0,"Customer Class")
+'Gui.SS_Form1.gsflexgridClass.TextMatrix(2,0,"")
+'Gui.SS_Form1.gsflexgridClass.ColWidth(0,"0")
+'Gui.SS_Form1.gsflexgridClass.ColWidth(1,"3600")
+'Gui.SS_Form1.gsflexgridClass.ColWidth(2,"1500")
+
+'Price Group
+Gui.SS_Form1.gsflexgridGroups.Rows(2)
+Gui.SS_Form1.gsflexgridGroups.FixedRows(1)
+Gui.SS_Form1.gsflexgridGroups.Cols(4)
+Gui.SS_Form1.gsflexgridGroups.TextMatrix(0,0,"Rec ID")
+Gui.SS_Form1.gsflexgridGroups.TextMatrix(1,0,"Price Group")
+'edit by TRT 10/24/13
+Gui.SS_Form1.gsflexgridGroups.TextMatrix(2,0,"Min. Net Sales")
+Gui.SS_Form1.gsflexgridGroups.TextMatrix(3,0,"")
+Gui.SS_Form1.gsflexgridGroups.ColWidth(0,"0")
+Gui.SS_Form1.gsflexgridGroups.ColWidth(1,"2000")
+'edit by TRT 10/24/13
+Gui.SS_Form1.gsflexgridGroups.ColWidth(2,"2000")
+Gui.SS_Form1.gsflexgridGroups.ColWidth(3,"1500")
+
+'Price Category
+Gui.SS_Form1.gsflexgridCat.Rows(2)
+Gui.SS_Form1.gsflexgridCat.FixedRows(1)
+Gui.SS_Form1.gsflexgridCat.Cols(3)
+Gui.SS_Form1.gsflexgridCat.TextMatrix(0,0,"Rec ID")
+Gui.SS_Form1.gsflexgridCat.TextMatrix(1,0,"Price Category")
+Gui.SS_Form1.gsflexgridCat.TextMatrix(2,0,"")
+Gui.SS_Form1.gsflexgridCat.ColWidth(0,"0")
+Gui.SS_Form1.gsflexgridCat.ColWidth(1,"3500")
+Gui.SS_Form1.gsflexgridCat.ColWidth(2,"2000")
+
+'Discount Code
+Gui.SS_Form1.gsflexgridCodes.Rows(2)
+Gui.SS_Form1.gsflexgridCodes.FixedRows(1)
+Gui.SS_Form1.gsflexgridCodes.Cols(5)
+Gui.SS_Form1.gsflexgridCodes.TextMatrix(0,0,"Rec ID")
+Gui.SS_Form1.gsflexgridCodes.TextMatrix(1,0,"Discount Code")
+Gui.SS_Form1.gsflexgridCodes.TextMatrix(2,0,"%")
+'edit by TRT 10/24/13
+Gui.SS_Form1.gsflexgridCodes.TextMatrix(3,0,"Effective Discount")
+Gui.SS_Form1.gsflexgridCodes.TextMatrix(4,0,"")
+Gui.SS_Form1.gsflexgridCodes.ColWidth(0,"0")
+Gui.SS_Form1.gsflexgridCodes.ColWidth(1,"1500")
+Gui.SS_Form1.gsflexgridCodes.ColWidth(2,"1000")
+'edit by TRT 10/24/13
+Gui.SS_Form1.gsflexgridCodes.ColWidth(3,"2500")
+Gui.SS_Form1.gsflexgridCodes.ColWidth(4,"1000")
+
+
+'format columns except tab Codes and groups flexgrid
+F.Intrinsic.Control.For(V.Local.iC,0,1,1)
+	Gui.SS_Form1.gsflexgridType.BuildStyle(1,V.Local.iC,"Format","Alignment",2)
+	Gui.SS_Form1.gsflexgridType.BuildStyle(1,V.Local.iC,"Type","Locked","True")
+	'commented out by TRT no Longer needed 10/24/13
+'	Gui.SS_Form1.gsflexgridClass.BuildStyle(1,V.Local.iC,"Format","Alignment",2)
+'	Gui.SS_Form1.gsflexgridClass.BuildStyle(1,V.Local.iC,"Type","Locked","True")
+'	Gui.SS_Form1.gsflexgridGroups.BuildStyle(1,V.Local.iC,"Format","Alignment",2)
+'	Gui.SS_Form1.gsflexgridGroups.BuildStyle(1,V.Local.iC,"Type","Locked","True")
+	Gui.SS_Form1.gsflexgridCat.BuildStyle(1,V.Local.iC,"Format","Alignment",2)
+	Gui.SS_Form1.gsflexgridCat.BuildStyle(1,V.Local.iC,"Type","Locked","True")
+F.Intrinsic.Control.Next(V.Local.iC)
+
+'format delete command button except tab Codes and groups flexgrid
+F.Intrinsic.Control.For(V.Local.iC,2,2,1)
+	Gui.SS_Form1.gsflexgridType.BuildStyle(1,V.Local.iC,"Format","Alignment",4)
+	Gui.SS_Form1.gsflexgridType.BuildStyle(1,V.Local.iC,"Type","Command","Delete")
+	'commented out by TRT no longer needed 10/24/13
+'	Gui.SS_Form1.gsflexgridClass.BuildStyle(1,V.Local.iC,"Format","Alignment",4)
+'	Gui.SS_Form1.gsflexgridClass.BuildStyle(1,V.Local.iC,"Type","Command","Delete")
+'	Gui.SS_Form1.gsflexgridGroups.BuildStyle(1,V.Local.iC,"Format","Alignment",4)
+'	Gui.SS_Form1.gsflexgridGroups.BuildStyle(1,V.Local.iC,"Type","Command","Delete")
+	Gui.SS_Form1.gsflexgridCat.BuildStyle(1,V.Local.iC,"Format","Alignment",4)
+	Gui.SS_Form1.gsflexgridCat.BuildStyle(1,V.Local.iC,"Type","Command","Delete")
+F.Intrinsic.Control.Next(V.Local.iC)
+
+'Tab Codes contains more flexgrid columns, format seperately
+'so does group codes flexgrid added those in
+
+F.Intrinsic.Control.For(V.Local.iC,0,2,1)
+	Gui.SS_Form1.gsflexgridCodes.BuildStyle(1,V.Local.iC,"Format","Alignment",2)
+	Gui.SS_Form1.gsflexgridCodes.BuildStyle(1,V.Local.iC,"Type","Locked","True")
+	Gui.SS_Form1.gsflexgridGroups.BuildStyle(1,V.Local.iC,"Format","Alignment",2)
+	Gui.SS_Form1.gsflexgridGroups.BuildStyle(1,V.Local.iC,"Type","Locked","True")
+F.Intrinsic.Control.Next(V.Local.iC)
+
+'Groups flexgrid colums 0 and 1
+Gui.SS_Form1.gsflexgridGroups.BuildStyle(1,1,"Format","Alignment",2)
+Gui.SS_Form1.gsflexgridGroups.BuildStyle(1,1,"Type","Locked","True")
+Gui.SS_Form1.gsflexgridGroups.BuildStyle(1,2,"Format","Alignment",6)
+Gui.SS_Form1.gsflexgridGroups.BuildStyle(1,2,"Type","Locked","True")
+
+
+
+'format of min net sales value
+'Gui.SS_Form1.gsflexgridGroups.BuildStyle(1,2,"Format","Mask","#,##0")
+
+
+
+F.Intrinsic.Control.For(V.Local.iC,3,3,1)
+	Gui.SS_Form1.gsflexgridCodes.BuildStyle(1,V.Local.iC,"Format","Alignment",2)
+	Gui.SS_Form1.gsflexgridCodes.BuildStyle(1,V.Local.iC,"Type","Locked","True")
+	'add the groups flexgrid format
+	Gui.SS_Form1.gsflexgridGroups.BuildStyle(1,V.Local.iC,"Format","Alignment",4)
+	Gui.SS_Form1.gsflexgridGroups.BuildStyle(1,V.Local.iC,"Type","Command","Delete")
+F.Intrinsic.Control.Next(V.Local.iC)
+
+'codes added field column four
+Gui.SS_Form1.gsflexgridCodes.BuildStyle(1,4,"Format","Alignment",4)
+Gui.SS_Form1.gsflexgridCodes.BuildStyle(1,4,"Type","Command","Delete")
+
+
+
+Program.Sub.FlexGrid.End
+
+Program.Sub.FlexPop.Start
+F.Intrinsic.Control.SetErrorHandler("FlexPop_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSql.Declare(String)
+V.Local.iR.Declare(Long)
+V.Local.iRow.Declare(Long)
+V.Local.sMinSale.Declare(String)
+
+
+'Customer Type
+Gui.SS_Form1.gsflexgridType.Visible(False)
+V.Local.iR.Set(1)
+V.Local.sSql.Set("Select * From GCG_3848_Disc_Type Order by Customer_Type")
+F.ODBC.Connection!con.OpenRecordsetRO("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	F.Intrinsic.Control.DoUntil(V.ODBC.con!rst.EOF,=,True)
+		F.Intrinsic.Math.Add(V.Local.iR,1,V.Local.iR)
+		F.Intrinsic.Math.Sub(V.Local.iR,1,V.Local.iRow)
+		Gui.SS_Form1.gsflexgridType.Rows(V.Local.iR)
+		Gui.SS_Form1.gsflexgridType.TextMatrix(0,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Rec_ID)
+		Gui.SS_Form1.gsflexgridType.TextMatrix(1,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Customer_Type)
+		Gui.SS_Form1.gsflexgridType.ApplyStyle(V.Local.iRow,1)
+		F.ODBC.con!rst.MoveNext
+	F.Intrinsic.Control.Loop
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Close
+Gui.SS_Form1.gsflexgridType.Visible(True)
+
+'comment by TRT 10/24/13
+'no longer needed
+''Customer Class
+'Gui.SS_Form1.gsflexgridClass.Visible(False)
+'V.Local.iR.Set(1)
+'V.Local.sSql.Set("Select * From GCG_DISC_CLASS Order by Customer_Class")
+'F.ODBC.Connection!con.OpenRecordsetRO("rst",V.Local.sSql)
+'F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+'	F.Intrinsic.Control.DoUntil(V.ODBC.con!rst.EOF,=,True)
+'		F.Intrinsic.Math.Add(V.Local.iR,1,V.Local.iR)
+'		F.Intrinsic.Math.Sub(V.Local.iR,1,V.Local.iRow)
+'		Gui.SS_Form1.gsflexgridClass.Rows(V.Local.iR)
+'		Gui.SS_Form1.gsflexgridClass.TextMatrix(0,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Rec_ID)
+'		Gui.SS_Form1.gsflexgridClass.TextMatrix(1,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Customer_Class)
+'		Gui.SS_Form1.gsflexgridClass.ApplyStyle(V.Local.iRow,1)
+'		F.ODBC.con!rst.MoveNext
+'	F.Intrinsic.Control.Loop
+'F.Intrinsic.Control.EndIf
+'F.ODBC.con!rst.Close
+'Gui.SS_Form1.gsflexgridClass.Visible(True)
+
+'Price Group
+
+Gui.SS_Form1.gsflexgridGroups.Visible(False)
+V.Local.iR.Set(1)
+V.Local.sSql.Set("Select * From GCG_3848_Disc_Group Order by Price_Group")
+F.ODBC.Connection!con.OpenRecordsetRO("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	F.Intrinsic.Control.DoUntil(V.ODBC.con!rst.EOF,=,True)
+		F.Intrinsic.Math.Add(V.Local.iR,1,V.Local.iR)
+		F.Intrinsic.Math.Sub(V.Local.iR,1,V.Local.iRow)
+		Gui.SS_Form1.gsflexgridGroups.Rows(V.Local.iR)
+		Gui.SS_Form1.gsflexgridGroups.TextMatrix(0,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Rec_ID)
+		Gui.SS_Form1.gsflexgridGroups.TextMatrix(1,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Price_Group)
+		F.Intrinsic.String.Format(V.ODBC.con!rst.FieldValTrim!Min_Net_Sales,"#,##0",V.Local.sMinSale)
+		Gui.SS_Form1.gsflexgridGroups.TextMatrix(2,V.Local.iRow,V.Local.sMinSale)
+		Gui.SS_Form1.gsflexgridGroups.ApplyStyle(V.Local.iRow,1)
+		F.ODBC.con!rst.MoveNext
+	F.Intrinsic.Control.Loop
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Close
+Gui.SS_Form1.gsflexgridGroups.Visible(True)
+
+'Price Category
+Gui.SS_Form1.gsflexgridCat.Visible(False)
+V.Local.iR.Set(1)
+V.Local.sSql.Set("Select * From GCG_3848_Disc_Cat Order by Price_Cat")
+F.ODBC.Connection!con.OpenRecordsetRO("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	F.Intrinsic.Control.DoUntil(V.ODBC.con!rst.EOF,=,True)
+		F.Intrinsic.Math.Add(V.Local.iR,1,V.Local.iR)
+		F.Intrinsic.Math.Sub(V.Local.iR,1,V.Local.iRow)
+		Gui.SS_Form1.gsflexgridCat.Rows(V.Local.iR)
+		Gui.SS_Form1.gsflexgridCat.TextMatrix(0,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Rec_ID)
+		Gui.SS_Form1.gsflexgridCat.TextMatrix(1,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Price_Cat)
+		Gui.SS_Form1.gsflexgridCat.ApplyStyle(V.Local.iRow,1)
+		F.ODBC.con!rst.MoveNext
+	F.Intrinsic.Control.Loop
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Close
+Gui.SS_Form1.gsflexgridCat.Visible(True)
+
+'Discount Code
+Gui.SS_Form1.gsflexgridCodes.Visible(False)
+V.Local.iR.Set(1)
+V.Local.sSql.Set("Select * From GCG_3848_Disc_Code Order by Disc_Code ")
+F.ODBC.Connection!con.OpenRecordsetRO("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	F.Intrinsic.Control.DoUntil(V.ODBC.con!rst.EOF,=,True)
+		F.Intrinsic.Math.Add(V.Local.iR,1,V.Local.iR)
+		F.Intrinsic.Math.Sub(V.Local.iR,1,V.Local.iRow)
+		Gui.SS_Form1.gsflexgridCodes.Rows(V.Local.iR)
+		Gui.SS_Form1.gsflexgridCodes.TextMatrix(0,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Rec_ID)
+		Gui.SS_Form1.gsflexgridCodes.TextMatrix(1,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Disc_Code)
+		F.Intrinsic.String.Format(V.ODBC.con!rst.FieldValTrim!Disc_Percent,".00##",V.Local.sMinSale)
+		Gui.SS_Form1.gsflexgridCodes.TextMatrix(2,V.Local.iRow,V.Local.sMinSale)
+		Gui.SS_Form1.gsflexgridCodes.TextMatrix(3,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Effective_Discount)
+		Gui.SS_Form1.gsflexgridCodes.ApplyStyle(V.Local.iRow,1)
+		F.ODBC.con!rst.MoveNext
+	F.Intrinsic.Control.Loop
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Close
+Gui.SS_Form1.gsflexgridCodes.Visible(True)
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("FlexPop_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Type.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.FlexPop.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_Disc_Type$}$ERIC$}$2/27/2013
+${$4$}$0$}$$}$0$}$-1$}$TRT$}$8/1/2013 7:55:24 AM$}$'revised script version
+'modified by Tyler T.
+'8/1/2013
+'Changes-Sort of flexgrid queries changed to name instead of ID.
+'Percent value under codes tab was changed to signed float property
+'Set Focus command used on all text boxes that will fire after a user has clicked add.
+${$4$}$0$}$$}$1$}$-1$}$TRT$}$8/8/2013 3:07:45 PM$}$Changed formatting of the cmdcode_Click to only allow up to four decimal places to the right, any more will be rounded to four decimal places.
+Program.Sub.Comments.End
+Program.Sub.ScreenSS.Start
+SS_Form1{{CAPTION::Discount Type Maintenance
+SS_Form1.CTRL{{NAME::txtType\\TYPE::2\\CAPTION::Customer Type\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::cmdType\\TYPE::5\\CAPTION::Add\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::txtClass\\TYPE::2\\CAPTION::Customer Class\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::cmdClass\\TYPE::5\\CAPTION::Add\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::txtGroup\\TYPE::2\\CAPTION::Price Group\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::cmdGroup\\TYPE::5\\CAPTION::Add\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::txtCat\\TYPE::2\\CAPTION::Price Category\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::cmdCat\\TYPE::5\\CAPTION::Add\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::txtCode\\TYPE::2\\CAPTION::Discount Code\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::txtCodePercent\\TYPE::2\\CAPTION::Discount Percent\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::cmdCode\\TYPE::5\\CAPTION::Add\\GROUP::-1\\BROWSER::0\\SIZE::1
+
+Program.Sub.ScreenSS.End
+
