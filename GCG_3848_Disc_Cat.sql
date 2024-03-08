@@ -1,0 +1,4 @@
+CREATE TABLE "GCG_3848_Disc_Cat"(
+ "Rec_ID" INTEGER,
+ "Price_Cat" CHAR(30),
+PRIMARY KEY ("Rec_ID"));
