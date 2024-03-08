@@ -1,0 +1,234 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form1..create
+gui.SS_Form1..caption("Disc Cust Maint.")
+gui.SS_Form1..size(2790,4410)
+gui.SS_Form1..position(0,0)
+gui.SS_Form1..event(unload,ss_form1_unload)
+gui.SS_Form1..alwaysontop(False)
+gui.SS_Form1..fontname("Arial")
+gui.SS_Form1..fontsize(8)
+gui.SS_Form1..forecolor(0)
+gui.SS_Form1..fontstyle(,,,,)
+gui.SS_Form1..BackColor(-2147483633)
+gui.SS_Form1..controlbox(True)
+gui.SS_Form1..maxbutton(False)
+gui.SS_Form1..minbutton(False)
+gui.SS_Form1..mousepointer(0)
+gui.SS_Form1..moveable(True)
+gui.SS_Form1..sizeable(False)
+gui.SS_Form1..ShowInTaskBar(True)
+gui.SS_Form1..titlebar(True)
+gui.SS_Form1.lbl_txtCustomer.create(label,"Customer",True,1800,200,1,100,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtCustomer.defaultvalue("")
+gui.SS_Form1.lbl_txtCustomer.controlgroup(0)
+gui.SS_Form1.txtCustomer.create(textbox,"",True,2025,330,0,100,335,False,0,Arial,8,16777215,1)
+gui.SS_Form1.txtCustomer.defaultvalue("")
+gui.SS_Form1.txtCustomer.controlgroup(0)
+gui.SS_Form1.lbl_txtType.create(label,"Type",True,1800,200,1,100,750,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtType.defaultvalue("")
+gui.SS_Form1.lbl_txtType.controlgroup(0)
+gui.SS_Form1.txtType.create(textbox,"",True,2025,330,0,100,950,False,0,Arial,8,16777215,1)
+gui.SS_Form1.txtType.defaultvalue("")
+gui.SS_Form1.txtType.controlgroup(0)
+gui.SS_Form1.lbl_txtCurYrNetSales.create(label,"Cur Yr. Net Sales",True,1800,200,1,100,1365,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtCurYrNetSales.defaultvalue("")
+gui.SS_Form1.lbl_txtCurYrNetSales.controlgroup(0)
+gui.SS_Form1.txtCurYrNetSales.create(textbox,"",True,2025,330,0,100,1565,False,0,Arial,8,16777215,1)
+gui.SS_Form1.txtCurYrNetSales.defaultvalue("")
+gui.SS_Form1.txtCurYrNetSales.controlgroup(0)
+gui.SS_Form1.lbl_txtCurYrPriceGRP.create(label,"Cur Yr. Price Group",True,1800,200,1,100,1980,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtCurYrPriceGRP.defaultvalue("")
+gui.SS_Form1.lbl_txtCurYrPriceGRP.controlgroup(0)
+gui.SS_Form1.txtCurYrPriceGRP.create(textbox,"",True,2025,330,0,100,2180,False,0,Arial,8,16777215,1)
+gui.SS_Form1.txtCurYrPriceGRP.defaultvalue("")
+gui.SS_Form1.txtCurYrPriceGRP.controlgroup(0)
+gui.SS_Form1.lbl_txtIntNetSales.create(label,"Initial Net Sales",True,1800,200,1,100,2595,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtIntNetSales.defaultvalue("")
+gui.SS_Form1.lbl_txtIntNetSales.controlgroup(0)
+gui.SS_Form1.txtIntNetSales.create(textbox,"",True,2025,330,0,100,2805,False,0,Arial,8,16777215,1)
+gui.SS_Form1.txtIntNetSales.defaultvalue("")
+gui.SS_Form1.txtIntNetSales.controlgroup(0)
+gui.SS_Form1.lbl_txtIntNetSalesPriceGrp.create(label,"Initial Net Sales Price Group",True,2100,200,1,100,3210,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtIntNetSalesPriceGrp.defaultvalue("")
+gui.SS_Form1.lbl_txtIntNetSalesPriceGrp.controlgroup(0)
+gui.SS_Form1.txtIntNetSalesPriceGrp.create(textbox,"",True,2025,330,0,100,3410,False,0,Arial,8,16777215,1)
+gui.SS_Form1.txtIntNetSalesPriceGrp.defaultvalue("")
+gui.SS_Form1.txtIntNetSalesPriceGrp.controlgroup(0)
+gui.SS_Form1.txtCustomer.tabstop(true)
+gui.SS_Form1.txtCustomer.tabindex(1)
+gui.SS_Form1.txtType.tabstop(true)
+gui.SS_Form1.txtType.tabindex(2)
+gui.SS_Form1.txtCurYrNetSales.tabstop(true)
+gui.SS_Form1.txtCurYrNetSales.tabindex(4)
+gui.SS_Form1.txtCurYrPriceGRP.tabstop(true)
+gui.SS_Form1.txtCurYrPriceGRP.tabindex(5)
+gui.SS_Form1.txtIntNetSales.tabstop(true)
+gui.SS_Form1.txtIntNetSales.tabindex(6)
+gui.SS_Form1.txtIntNetSalesPriceGrp.tabstop(true)
+gui.SS_Form1.txtIntNetSalesPriceGrp.tabindex(7)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.Global.sCustID.Declare(String)
+Variable.Global.sType.Declare(String)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'Micro Trak
+'Modifications that are requested by them.
+
+'On the Customer Master under the Discount button, they don't need to see the break downs .
+'What they would like to see is similar to what is shown above. I tried to talk them into a report, but they said they need something they can look at quickly.
+'They would like to see this on the order header as well.
+'
+'They would NOT be allowed to make changes to these values EXCEPT the Type Key when accessed using the script button.
+'
+'If the initial sales value needs changed, they would have to go to AR > Customer > File > Initial Net Sales and make changes there.
+
+'Hooks:
+'Customer Master Populate : 14350
+'Customer Master  Script 2: 14370
+
+'Order Header Populate: 11560
+'Order Header Script 2:  11920 OPEN GAB SCREEN IN VIEW ONLY
+
+
+' customer master Rename script 2 button
+F.Intrinsic.Control.If(V.Caller.Hook,=,14350)
+	V.Passed.000202.Set("Discount")
+	F.Intrinsic.Control.End
+F.Intrinsic.Control.EndIf
+'customer master script 2 button
+F.Intrinsic.Control.If(V.Caller.Hook,=,14370)
+	F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+	V.Global.sCustId.Set(V.Passed.000002)
+	'sort field passed variable is 38
+	V.Global.sType.Set(V.Passed.000038)
+	F.Intrinsic.Control.CallSub(Populate)
+'	Gui.SS_Form1.txtType.SetFocus
+	Gui.SS_Form1..Show
+F.Intrinsic.Control.EndIf
+
+'order header populate
+F.Intrinsic.Control.If(V.Caller.Hook,=,11560)
+	V.Passed.000202.Set("Discount")
+	F.Intrinsic.Control.End
+F.Intrinsic.Control.EndIf
+'order header script 2 button
+F.Intrinsic.Control.If(V.Caller.Hook,=,11920)
+	'have to lock the type field
+	F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+	'set order sort field to sort passed variable 000045
+	V.Global.sCustID.Set(V.Passed.000006)
+	V.Global.sType.Set(V.Passed.000045)
+	F.Intrinsic.Control.CallSub(Populate)
+	Gui.SS_Form1.txtType.Enabled(false)
+	Gui.SS_Form1..Show
+F.Intrinsic.Control.EndIf
+
+
+
+
+
+
+Program.Sub.Main.End
+
+program.sub.ss_form1_unload.start
+F.ODBC.Connection!con.Close
+F.Intrinsic.Control.End
+
+program.sub.ss_form1_unload.end
+
+Program.Sub.Populate.Start
+F.Intrinsic.Control.SetErrorHandler("Populate_Err")
+F.Intrinsic.Control.ClearErrors
+
+'sub that will populate the values on the screen.
+
+'Customer: passed from customer master or order header
+'Type: GCG_DIsc_Cust table
+'CUr Yr. Net Sales: GCG_Disc_Curr_Sales
+'Cur Yr. Price Group:
+'Initial Net Sales: GCG_Disc_Beg_Sales
+'Initial Net Sales Group:
+
+V.Local.sError.Declare(String)
+V.Local.sQuery.Declare(String)
+
+Gui.SS_Form1.txtCustomer.Text(V.Global.sCustID)
+Gui.SS_Form1.txtType.Text(V.Global.sType)
+
+'type will be coming from the CODE SORT field on the Customer Master, or the order header, whichever one we are on.
+F.Intrinsic.String.Concat("Select * From GCG_3848_Disc_Cust Where Customer = '",V.Global.sCustID.Trim,"'",V.Local.sQuery)
+F.ODBC.Connection!con.OpenLocalRecordsetRO("rst",V.Local.sQuery)
+F.Intrinsic.Control.If(V.ODBC.con!RST.EOF,<>,True)
+	Gui.SS_Form1.txtCurYrPriceGRP.Text(V.ODBC.con!RST.FieldValTrim!Customer_Group)
+F.Intrinsic.Control.EndIf
+F.ODBC.con!RST.Close
+
+F.Intrinsic.String.Concat("Select * From GCG_3848_Curr_Sales Where Customer = '",V.Global.sCustID.Trim,"'",V.Local.sQuery)
+F.ODBC.connection!con.OpenLocalRecordsetRO("rst",V.Local.sQuery)
+F.Intrinsic.Control.If(V.ODBC.con!RST.EOF,<>,True)
+	Gui.SS_Form1.txtCurYrNetSales.Text(V.ODBC.con!RST.FieldValTrim!CUrr_Net_Sales)
+	'have to query for the currenty price group from the GCG_Disc_Cust table
+	F.Intrinsic.String.Concat("Select Price_Group, Min_Net_Sales From GCG_3848_Disc_Cust Where Customer_Type = '",V.Global.sType.Trim,"' Order By Min_Net_Sales",V.Local.sQuery)
+	F.ODBC.Connection!con.OpenLocalRecordsetRO("rst1",V.Local.sQuery)
+	F.Intrinsic.Control.DoUntil(V.ODBC.con!rst1.EOF,=,True)
+		F.Intrinsic.Control.If(V.ODBC.con!rst.FieldValTrim!curr_net_Sales,>=,V.ODBC.con!rst1.FieldValTrim!Min_Net_Sales)
+			Gui.SS_Form1.txtCurYrPriceGRP.Text(V.ODBC.con!rst1.FieldValTrim!Price_Group)
+		F.Intrinsic.Control.EndIf
+	F.ODBC.con!rst1.MoveNext
+	F.Intrinsic.Control.Loop
+	F.ODBC.con!rst1.Close
+F.Intrinsic.Control.EndIf
+F.ODBC.con!RST.Close
+
+F.Intrinsic.String.Concat("Select * From GCG_3848_Beg_Sales Where Customer = '",V.Global.sCustID,"'",V.Local.sQuery)
+F.ODBC.Connection!con.OpenLocalRecordsetRO("rst",V.Local.sQuery)
+F.Intrinsic.Control.If(V.ODBC.con!RST.EOF,<>,True)
+	Gui.SS_Form1.txtIntNetSales.Text(V.ODBC.con!RST.FieldValTrim!Init_Net_Sales)
+	Gui.SS_Form1.txtIntNetSalesPriceGrp.Text(V.ODBC.con!RST.FieldValTrim!Init_Price_Group)
+F.Intrinsic.Control.EndIf
+F.ODBC.con!RST.Close
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Populate_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Cust.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Populate.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_Disc_Cust$}$TRT$}$9/9/2013
+${$1$}$$}$$}$3$}$11920$}$OES0200A-SCRIPT-2-HOOK$}$4/26/2016 3:47:16 PM$}$(Program: ORD200; Screen: OES0200A)
+
+${$1$}$$}$$}$2$}$11560$}$OES0200A-POPULATE-HOOK$}$4/26/2016 3:46:59 PM$}$(Program: ORD200; Screen: OES0200A)
+
+${$1$}$$}$$}$1$}$14370$}$Script 2$}$4/26/2016 3:46:39 PM$}$(Program: AR0020GI; Screen: ARS002A1)
+
+${$1$}$$}$$}$0$}$14350$}$Populate Hook$}$4/26/2016 3:46:19 PM$}$(Program: AR0020GI; Screen: ARS002A1)
+
+${$3$}$0$}$$}$-1$}$-1$}$$}$1/1/1900$}$This new GAB script will replace the OLD version of the GAB script
+
+A screen will only show customer, Type (editable), only from the customer master, not the ORder Header, Cur Yr. Net Sales, Cur Yr. Price Group, Initial Net Sales, Initial Net Sales Price Group.
+
+Program.Sub.Comments.End
+Program.Sub.ScreenSS.Start
+SS_Form1{{CAPTION::Discount Customer Maintenance
+SS_Form1.CTRL{{NAME::txtCustomer\\TYPE::2\\CAPTION::Customer\\TABSTOP::1\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::txtType\\TYPE::2\\CAPTION::Type\\TABSTOP::2\\GROUP::-1\\BROWSER::1\\SIZE::1
+SS_Form1.CTRL{{NAME::txtCurYrNetSales\\TYPE::2\\CAPTION::Cur Yr. Net Sales\\TABSTOP::3\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::txtCurYrPriceGRP\\TYPE::2\\CAPTION::Cur Yr. Price Group\\TABSTOP::4\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::txtIntNetSales\\TYPE::2\\CAPTION::Initial Net Sales\\TABSTOP::5\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::txtIntNetSalesPriceGrp\\TYPE::2\\CAPTION::Initial Net Sales Price Group\\TABSTOP::6\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::cmdSave\\TYPE::5\\CAPTION::Save\\TABSTOP::7\\GROUP::-1\\BROWSER::0\\SIZE::1
+
+Program.Sub.ScreenSS.End
+
