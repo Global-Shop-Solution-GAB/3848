@@ -1,0 +1,883 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form1..create
+gui.SS_Form1..caption("Discount Type Setup")
+gui.SS_Form1..size(9120,8085)
+gui.SS_Form1..minx(0)
+gui.SS_Form1..miny(0)
+gui.SS_Form1..position(0,0)
+gui.SS_Form1..event(unload,unload)
+gui.SS_Form1..alwaysontop(False)
+gui.SS_Form1..fontname("Arial")
+gui.SS_Form1..fontsize(8)
+gui.SS_Form1..forecolor(0)
+gui.SS_Form1..fontstyle(False,False,False,False,)
+gui.SS_Form1..BackColor(-2147483633)
+gui.SS_Form1..controlbox(True)
+gui.SS_Form1..maxbutton(False)
+gui.SS_Form1..minbutton(False)
+gui.SS_Form1..mousepointer(0)
+gui.SS_Form1..moveable(True)
+gui.SS_Form1..sizeable(False)
+gui.SS_Form1..ShowInTaskBar(True)
+gui.SS_Form1..titlebar(True)
+gui.SS_Form1.frame1.create(frame)
+gui.SS_Form1.frame1.caption("Load Grid")
+gui.SS_Form1.frame1.size(8430,1365)
+gui.SS_Form1.frame1.position(200,75)
+gui.SS_Form1.frame1.visible(True)
+gui.SS_Form1.frame1.borderstyle(1)
+gui.SS_Form1.frame1.fontname("Arial")
+gui.SS_Form1.frame1.fontsize(8)
+gui.SS_Form1.lbl_txtType.create(label,"Type",True,1800,200,1,200,200,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtType.parent("frame1")
+gui.SS_Form1.lbl_txtType.defaultvalue("")
+gui.SS_Form1.lbl_txtType.controlgroup(0)
+gui.SS_Form1.txtType.create(textbox,"",True,3465,330,0,200,470,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtType.parent("frame1")
+gui.SS_Form1.txtType.maxLength(30)
+gui.SS_Form1.txtType.defaultvalue("")
+gui.SS_Form1.txtType.controlgroup(0)
+gui.SS_Form1.cmd_txtType.create(button)
+gui.SS_Form1.cmd_txtType.caption("^")
+gui.SS_Form1.cmd_txtType.visible(True)
+gui.SS_Form1.cmd_txtType.size(330,330)
+gui.SS_Form1.cmd_txtType.zorder(0)
+gui.SS_Form1.cmd_txtType.position(3800,455)
+gui.SS_Form1.cmd_txtType.enabled(True)
+gui.SS_Form1.cmd_txtType.parent("frame1")
+gui.SS_Form1.cmd_txtType.fontname("Arial")
+gui.SS_Form1.cmd_txtType.fontsize(8)
+gui.SS_Form1.cmd_txtType.event(click,type_click)
+gui.SS_Form1.cmd_txtType.defaultvalue("")
+gui.SS_Form1.cmd_txtType.controlgroup(0)
+gui.SS_Form1.lbl_txtgroup.create(label,"Group",True,1740,200,1,4300,245,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtgroup.parent("frame1")
+gui.SS_Form1.lbl_txtgroup.defaultvalue("")
+gui.SS_Form1.lbl_txtgroup.controlgroup(0)
+gui.SS_Form1.txtgroup.create(textbox,"",True,3435,330,0,4290,470,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtgroup.parent("frame1")
+gui.SS_Form1.txtgroup.maxLength(30)
+gui.SS_Form1.txtgroup.defaultvalue("")
+gui.SS_Form1.txtgroup.controlgroup(0)
+gui.SS_Form1.cmd_txtgroup.create(button)
+gui.SS_Form1.cmd_txtgroup.caption("^")
+gui.SS_Form1.cmd_txtgroup.visible(True)
+gui.SS_Form1.cmd_txtgroup.size(360,330)
+gui.SS_Form1.cmd_txtgroup.zorder(0)
+gui.SS_Form1.cmd_txtgroup.position(7900,470)
+gui.SS_Form1.cmd_txtgroup.enabled(True)
+gui.SS_Form1.cmd_txtgroup.parent("frame1")
+gui.SS_Form1.cmd_txtgroup.fontname("Arial")
+gui.SS_Form1.cmd_txtgroup.fontsize(8)
+gui.SS_Form1.cmd_txtgroup.event(click,group_click)
+gui.SS_Form1.cmd_txtgroup.defaultvalue("")
+gui.SS_Form1.cmd_txtgroup.controlgroup(0)
+gui.SS_Form1.cmdLoad.create(button)
+gui.SS_Form1.cmdLoad.caption("Load")
+gui.SS_Form1.cmdLoad.visible(True)
+gui.SS_Form1.cmdLoad.size(1000,360)
+gui.SS_Form1.cmdLoad.zorder(0)
+gui.SS_Form1.cmdLoad.position(185,875)
+gui.SS_Form1.cmdLoad.enabled(True)
+gui.SS_Form1.cmdLoad.parent("frame1")
+gui.SS_Form1.cmdLoad.fontname("Arial")
+gui.SS_Form1.cmdLoad.fontsize(8)
+gui.SS_Form1.cmdLoad.event(click,load_click)
+gui.SS_Form1.cmdLoad.defaultvalue("")
+gui.SS_Form1.cmdLoad.controlgroup(0)
+gui.SS_Form1.cmdAdd.create(button)
+gui.SS_Form1.cmdAdd.caption("Save")
+gui.SS_Form1.cmdAdd.visible(True)
+gui.SS_Form1.cmdAdd.size(985,375)
+gui.SS_Form1.cmdAdd.zorder(0)
+gui.SS_Form1.cmdAdd.position(195,6990)
+gui.SS_Form1.cmdAdd.enabled(True)
+gui.SS_Form1.cmdAdd.fontname("Arial")
+gui.SS_Form1.cmdAdd.fontsize(8)
+gui.SS_Form1.cmdAdd.event(click,save_click)
+gui.SS_Form1.cmdAdd.defaultvalue("")
+gui.SS_Form1.cmdAdd.controlgroup(0)
+gui.SS_Form1.gsflexgrid1.create(gsflexgrid)
+gui.SS_Form1.gsflexgrid1.FixedRows(0)
+gui.SS_Form1.gsflexgrid1.FixedCols(0)
+gui.SS_Form1.gsflexgrid1.visible(True)
+gui.SS_Form1.gsflexgrid1.size(8505,5235)
+gui.SS_Form1.gsflexgrid1.zorder(0)
+gui.SS_Form1.gsflexgrid1.position(200,1600)
+gui.SS_Form1.gsflexgrid1.enabled(True)
+gui.SS_Form1.gsflexgrid1.event(mouseup,gsflexgrid1_mouseup)
+gui.SS_Form1.gsflexgrid1.event(commandclick,gsflexgrid1_commandclick)
+gui.SS_Form1.txtType.tabstop(True)
+gui.SS_Form1.txtType.tabindex(1)
+gui.SS_Form1.cmd_txtType.tabstop(True)
+gui.SS_Form1.cmd_txtType.tabindex(2)
+gui.SS_Form1.txtgroup.tabstop(True)
+gui.SS_Form1.txtgroup.tabindex(3)
+gui.SS_Form1.cmd_txtgroup.tabstop(True)
+gui.SS_Form1.cmd_txtgroup.tabindex(4)
+gui.SS_Form1.cmdLoad.tabstop(True)
+gui.SS_Form1.cmdLoad.tabindex(5)
+gui.SS_Form1.cmdAdd.tabstop(True)
+gui.SS_Form1.cmdAdd.tabindex(6)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.Global.sCustId.Declare(String)
+Variable.Global.bSort.Declare(Boolean,True)
+Variable.UDT.uGrid.Define("Group",String,Price_Group)
+Variable.UDT.uGrid.Define("Discount",String,Disc_Code)
+Variable.UDT.uGrid.Define("Category",String,Price_Category)
+Variable.UDT.uGrid.Define("Type",String,Customer_Type)
+Variable.UDT.uGrid.Define("Min_Sales",Long,Min_Net_Sales)
+Variable.UDT.uGrid.Define("Rec_ID",Long,Rec_ID)
+Variable.uGlobal.uGrid.Declare("uGrid")
+Variable.Global.bClear.Declare(Boolean,False)
+Variable.Global.sType.Declare(String)
+Variable.Global.sGroup.Declare(String)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+'customer master screen in GSS
+V.Local.sError.Declare(String)
+'user will make selection in Load Grid frame on GAB screen and click Load to load grid with data from custom sql table
+'user can click the Delete button within rows of Grid to remove row from grid and custom sql table
+'user can add a new row to grid and custom sql table by selecting a discount code and min. net sale and clicking add.
+V.Local.sCap.Declare(String)
+
+'this version of the script will entail only loading the type,
+'we will not make this information customer specific.
+'it will only be used to set up the different type tiers for the discount, no customer will be stored
+
+'Script modifed by TRT on 10/25/13
+'Quote 5042 for Micro-Trak that contains necessary modifications
+
+'going to be ran from a custom menu item
+
+'F.Intrinsic.Control.If(V.Caller.Hook,=,14350)
+'	V.Passed.000202.Set("Discount")
+'	F.Intrinsic.Control.End
+
+'F.Intrinsic.Control.EndIf
+'
+''script 2 button
+'F.Intrinsic.Control.If(V.Caller.Hook,=,14370)
+	F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+	F.Intrinsic.Control.CallSub(Flexgrid)
+	'caption of screen to include customer
+'	Gui.SS_Form1..Caption(V.Local.sCap)
+	Gui.SS_Form1..Show
+'F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Cust.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+Program.Sub.Unload.Start
+F.ODBC.Connection!con.Close
+F.Intrinsic.Control.End
+
+Program.Sub.Unload.End
+
+program.sub.gsflexgrid1_commandclick.start
+F.Intrinsic.Control.SetErrorHandler("gsflexgrid1_commandclick_Err")
+F.Intrinsic.Control.ClearErrors
+
+'discount code browser that will appear when clicking on the flexgrid
+
+V.Local.sError.Declare(String)
+V.local.iRow.Declare(Long)
+V.Local.sTitle.Declare(String)
+V.Local.iWidth.Declare(Long)
+V.Local.sSQL.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.iAlign.Declare(Long)
+V.Local.sFormat.Declare(String)
+
+
+V.Local.iRow.Set(V.Screen.SS_Form1!gsflexgrid1.Row)
+
+F.Intrinsic.String.Split("Discount Code*!*Discount Percentage*!*Effective Discount*!*","*!*",V.Local.sTitle)
+F.Intrinsic.String.Split("1500*!*2000*!*3500*!*0","*!*",V.Local.iWidth)
+F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+V.Local.sSQL.Set("Select Disc_Code, Round(Disc_Percent, 4), Effective_Discount From GCG_3848_Disc_Code Order By Disc_Code")
+F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.sRet)
+
+'F.Intrinsic.UI.Browser("Discount Code","con","Select DIsc_Code,Round(Disc_Percent,4) AS Disc_Percent,Effective_Discount From GCG_3848_Disc_Code Order By Disc_Code",V.Local.sTitle,V.Local.iWidth,"10000","10000",V.local.sFormat,V.local.ialign,V.Local.sRet)
+'had to use this format since the regular browser was not formatting my double field entry.
+F.Intrinsic.UI.BrowserFromString("Discount Code",V.Local.sRet,"*!*","#$#",V.Local.sTitle,V.Local.iWidth,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,=,"***CANCEL***")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.SS_Form1.gsflexgrid1.TextMatrix(3,V.Local.iRow,V.Local.sRet(0))
+'	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("gsflexgrid1_commandclick_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Type_Setup.GAS",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.gsflexgrid1_commandclick.End
+
+program.sub.type_click.start
+F.Intrinsic.Control.SetErrorHandler("type_click_Err")
+F.Intrinsic.Control.ClearErrors
+'F.Intrinsic.Debug.InvokeDebugger
+'F.Intrinsic.Debug.Stop
+
+V.Local.sError.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.sCol.Declare(String)
+V.Local.sColW.Declare(String)
+V.Local.sRet.Declare(String)
+
+'F.Intrinsic.String.Concat("Select Distinct(Customer_Type) From GCG_3848_Disc_Cust Where Customer_Type IS NOT NULL or Customer_Type <> '' Order By Customer_Type Asc","",V.Local.sSQL)
+'edited by TRT to pull form correct table GCG_3848_Disc_Type
+V.Local.sSQL.Set("Select Distinct(Customer_Type) From GCG_3848_Disc_Type Order By CUstomer_Type")
+V.Local.sCol.Set("Customer Type")
+V.Local.sColW.Set("3500")
+F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+F.Intrinsic.UI.Browser("Select a Customer Type","Con",V.Local.sSQL,V.Local.sCol,V.Local.sColW,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.SS_Form1.txtType.Text(V.Local.sRet(0).Trim)
+F.Intrinsic.Control.EndIf
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("type_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Cust.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.type_click.End
+
+program.sub.class_click.start
+'no longer needed 10/25/13
+
+
+'F.Intrinsic.Control.SetErrorHandler("class_click_Err")
+'F.Intrinsic.Control.ClearErrors
+'
+'V.Local.sError.Declare(String)
+'V.Local.sSQL.Declare(String)
+'V.Local.sCol.Declare(String)
+'V.Local.sColW.Declare(String)
+'V.Local.sRet.Declare(String)
+'
+''F.Intrinsic.String.Concat("Select Distinct(Customer_Class) From GCG_Disc_Cust Where Customer_Class IS NOT NULL or Customer_Class <> '' Order By Customer_Class Asc","",V.Local.sSQL)
+''edited by TRT to pull from correct table which would be GCG_Disc_Class
+'V.Local.sSQL.Set("Select Distinct(Customer_Class) From GCG_Disc_Class Order By Customer_Class")
+'V.Local.sCol.Set("Customer Class")
+'V.Local.sColW.Set("3500")
+'F.Intrinsic.UI.Browser("Select a Customer Class","Con",V.Local.sSQL,V.Local.sCol,V.Local.sColW,V.Local.sRet)
+'F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+'	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+'	Gui.SS_Form1.txtClass.Text(V.Local.sRet(0).Trim)
+'F.Intrinsic.Control.EndIf
+'
+'F.Intrinsic.Control.ExitSub
+'
+'F.Intrinsic.Control.Label("class_click_Err")
+'F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+'	Function.Intrinsic.String.Concat("Project: GCG_Disc_Cust.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+'	F.Intrinsic.UI.Msgbox(V.Local.sError)
+'	F.Intrinsic.Control.CallSub(Unload)
+'Function.Intrinsic.Control.EndIf
+'
+
+program.sub.class_click.End
+
+program.sub.group_click.start
+F.Intrinsic.Control.SetErrorHandler("group_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.sCol.Declare(String)
+V.Local.sColW.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.sFormat.Declare(String)
+V.Local.ialign.Declare(Long)
+
+
+'F.Intrinsic.String.Concat("Select Distinct(Price_Group) From GCG_Disc_Cust Where Price_Group IS NOT NULL or Price_Group <> '' Order By Price_Group Asc","",V.Local.sSQL)
+'edit by TRT to change sql to point to gcg_disc_group table
+V.Local.sSQL.Set("Select Distinct(Price_Group), Min_Net_Sales From GCG_3848_Disc_Group Order By Price_Group")
+V.Local.sCol.Set("Price Group*!*Min.Net Sales")
+V.Local.sColW.Set("3500*!*3500")
+F.Intrinsic.String.Split(V.Local.sCol,"*!*",V.Local.sCol)
+F.Intrinsic.String.Split(V.Local.sColW,"*!*",V.Local.sColW)
+F.Intrinsic.String.Split("*!*#,##0","*!*",V.Local.Sformat)
+F.Intrinsic.String.Split("0*!*6","*!*",V.Local.ialign)
+
+
+
+
+F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+'F.Intrinsic.UI.Browser("Select a Price Group","Con",V.Local.sSQL,V.Local.sCol,V.Local.sColW,V.Local.sRet)
+F.Intrinsic.UI.Browser("Select a Price Group","Con",V.Local.sSQL,V.Local.sCol,V.Local.sColW,10000,10000,V.local.sformat,V.local.iAlign,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.SS_Form1.txtGroup.Text(V.Local.sRet(0).Trim)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("group_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Cust.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.group_click.End
+
+program.sub.category_click.start
+
+'no longer needed 10-25-13.
+'TRT
+
+'F.Intrinsic.Control.SetErrorHandler("category_click_Err")
+'F.Intrinsic.Control.ClearErrors
+'
+'V.Local.sError.Declare(String)
+'V.Local.sSQL.Declare(String)
+'V.Local.sCol.Declare(String)
+'V.Local.sColW.Declare(String)
+'V.Local.sRet.Declare(String)
+'
+''F.Intrinsic.String.Concat("Select Distinct(Price_Category) From GCG_Disc_Cust Where Price_Category IS NOT NULL or Price_Category <> '' Order By Price_Category Asc","",V.Local.sSQL)
+''edited by TRT to pull from correct table, GCG_Disc_Price
+'V.Local.sSQL.Set("Select Distinct(Price_Cat) From GCG_Disc_Cat Order By Price_Cat")
+'V.Local.sCol.Set("Price Category")
+'V.Local.sColW.Set("3500")
+'F.Intrinsic.UI.Browser("Select a Price Category","Con",V.Local.sSQL,V.Local.sCol,V.Local.sColW,V.Local.sRet)
+'F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+'	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+'	Gui.SS_Form1.txtCategory.Text(V.Local.sRet(0).Trim)
+'F.Intrinsic.Control.EndIf
+'
+'F.Intrinsic.Control.ExitSub
+'
+'F.Intrinsic.Control.Label("category_click_Err")
+'F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+'	Function.Intrinsic.String.Concat("Project: GCG_Disc_Cust.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+'	F.Intrinsic.UI.Msgbox(V.Local.sError)
+'	F.Intrinsic.Control.CallSub(Unload)
+'Function.Intrinsic.Control.EndIf
+'
+program.sub.category_click.End
+
+program.sub.load_click.start
+F.Intrinsic.Control.SetErrorHandler("load_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.iRow.Declare(Long)
+V.Local.iR.Declare(Long)
+V.Local.iUB.Declare(Long)
+'V.Local.sType.Declare(String)
+'V.Local.sGroup.Declare(String)
+V.Local.iMinSales.Declare(Long)
+V.Local.stablename.Declare(String)
+V.Local.sfieldname.Declare(String)
+V.Local.stxtfields.Declare(String)
+V.Local.srefer.Declare(String)
+
+
+
+V.Local.iR.Set(1)
+V.Local.iUB.Set(0)
+V.uGlobal.uGrid.Redim(-1,-1)
+
+'update our global variables
+V.global.sType.Set(V.Screen.SS_Form1!txtType.Text)
+V.global.sGroup.Set(V.Screen.SS_Form1!txtgroup.Text)
+
+'edti by TRT
+'verify first that the data they entered is actually what is found within the tables? Type and Group only
+'table name
+F.Intrinsic.String.Split("GCG_3848_Disc_Type*!*GCG_3848_Disc_Group","*!*",V.Local.sTableName)
+'field names
+F.Intrinsic.String.Split("Customer_Type*!*Price_Group","*!*",V.Local.sFieldName)
+'txtfields
+F.Intrinsic.String.Split("txtType*!*txtGroup","*!*",V.Local.sTxtFields)
+'sRefer field to give what was needed.
+F.Intrinsic.String.Split("Type*!*Group","*!*",V.Local.sRefer)
+'F.Intrinsic.Debug.InvokeDebugger
+'F.Intrinsic.Debug.Stop
+'loop through entirety
+F.Intrinsic.Control.For(V.Local.iR,0,1,1)
+	'first make sure that a field is not blank
+	F.Intrinsic.Control.If(v.Screen.SS_Form1![v.local.stxtfields(v.local.ir)].Text,=,"")
+		Gui.SS_Form1.cmdAdd.Enabled(True)
+		F.Intrinsic.UI.CloseWaitDialog
+		F.Intrinsic.String.Concat(V.Local.sRefer(v.Local.iR)," cannot be blank.",V.local.sSQL)
+		F.Intrinsic.UI.Msgbox(V.Local.sSQL,"Load Error")
+		F.Intrinsic.Control.ExitSub
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Concat("Select * From ",v.Local.sTableName(v.Local.iR)," Where ",v.Local.sFieldName(v.Local.iR)," = '",v.Screen.SS_Form1![v.local.sTXTfields(v.local.ir)].Text,"'",v.Local.sSQL)
+'F.Intrinsic.Debug.InvokeDebugger
+'F.Intrinsic.Debug.Stop
+'		F.Intrinsic.String.Build("Select * From {0} Where {1} = '{2}'",v.Local.sTableName(v.Local.iR),v.Local.sFieldName(v.Local.iR),v.Screen.SS_Form1![v.local.sTxtFields(v.local.ir)],v.Local.sSQL)
+		F.ODBC.connection!con.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+		F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,True)
+			Gui.SS_Form1.cmdAdd.Enabled(True)
+			F.Intrinsic.UI.CloseWaitDialog
+			F.Intrinsic.String.Concat("Verify correct ",V.Local.sRefer(v.Local.iR)," field entry.",V.local.sSQL)
+			F.Intrinsic.UI.Msgbox(V.Local.sSQL,"Load Error")
+			F.ODBC.con!rst.Close
+			F.Intrinsic.Control.ExitSub
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rst.Close
+F.Intrinsic.Control.Next(V.Local.iR)
+
+'loadsdatafromcustomtabletoexcel
+'clear out the three Group, Class, and Type fields if not already done so.
+'Gui.SS_Form1.txtCategory.Text("")
+
+'lock up the text and browser fields from them being changed.
+Gui.SS_Form1.txtgroup.Enabled(False)
+Gui.SS_Form1.txtType.Enabled(False)
+Gui.SS_Form1.cmd_txtgroup.Enabled(False)
+Gui.SS_Form1.cmd_txtType.Enabled(False)
+
+Gui.SS_Form1.gsflexgrid1.Visible(False)
+F.Intrinsic.Control.CallSub(Flexgrid)
+F.Intrinsic.String.Concat(" Select Rec_ID, Customer_Type,Price_Category ,Price_Group,Disc_Code,Min_Net_Sales From GCG_3848_Disc_Cust Where Customer_Type = '",V.global.sType.Trim,"'",V.Local.sSQL)
+F.Intrinsic.String.Concat(V.Local.sSQL," AND Price_Group = '",V.global.sGroup.Trim,"'",V.Local.sSQL)
+F.Intrinsic.String.Concat(V.Local.sSQL," Order By Price_Category,Price_Group, Disc_Code",V.local.ssql)
+
+F.ODBC.Connection!con.OpenRecordsetRO("rst",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,<>,True)
+	'load udt that will be used for sorting purposes
+	F.Intrinsic.Variable.LoadUDTFromRecordset("con","rst","v.uglobal.uGrid",False)
+
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Close
+'F.Intrinsic.Control.If(V.Global.bclear,=,False)
+'		'meaning we are coming from the save routine, so do not clear the fields, if we are first coming through the
+'		'load initial it will be set to False , everytime we hit it through the True set it back to false
+'		'edit by TRT 10/25/13
+''		Gui.SS_Form1.txtCategory.Text("")
+'		Gui.SS_Form1.txtgroup.Text("")
+''		Gui.SS_Form1.txtType.Text("")
+''		Gui.SS_Form1.txtClass.Text("")
+'		'edit by TRT 10/25/13
+'F.Intrinsic.Control.EndIf
+'F.Intrinsic.Debug.InvokeDebugger
+'F.Intrinsic.Debug.Stop
+
+
+'here is where we are going to populate the rest of the records if they have a record or not.
+'now this only has existing records for us, we have to create records in the flexgrid for categories that are not there stored in the GCG-disc_Cust table
+F.Intrinsic.String.Build("Select Price_Cat From GCG_3848_Disc_Cat Where Price_Cat Not In (Select Price_Category  From GCG_3848_DIsc_Cust Where Price_Group = '{0}' AND Customer_Type = '{1}')",V.global.sGroup.Trim,V.global.sType.Trim,V.Local.sSQL)
+F.ODBC.Connection!con.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+F.Intrinsic.Control.DoUntil(V.ODBC.con!rst.EOF,=,True)
+	'have to get the min_net_sales value from the GCG_Disc_Group table.
+	F.Intrinsic.String.Concat("Select Min_Net_Sales From GCG_3848_Disc_Group Where Price_Group = '",V.global.sGroup.Trim,"'",V.Local.sSQL)
+	F.ODBC.cONNECTION!con.OpenLocalRecordsetRO("rstGroup",V.Local.sSQL)
+	F.Intrinsic.Control.If(V.ODBC.con!rstGroup.EOF,<>,True)
+		'grab that min net sales value.
+		V.Local.iMinSales.Set(V.ODBC.con!rstGroup.FieldValTrim!Min_Net_Sales)
+	F.Intrinsic.Control.Else
+		V.Local.iMinSales.Set(0)
+	F.Intrinsic.Control.EndIf
+
+	F.ODBC.con!rstGroup.Close
+
+	F.Intrinsic.Control.If(V.uGlobal.uGrid.UBound,=,-1)
+		V.uGlobal.uGrid.Redim(0,0)
+'		F.Intrinsic.Math.Add(V.Local.iUB,1,V.Local.iUB)
+	F.Intrinsic.Control.Else
+'			V.Local.iUB.Set(V.uGlobal.uGrid.UBound)
+		F.Intrinsic.Math.Add(V.uglobal.uGrid.ubound,1,V.Local.iUB)
+		V.uGlobal.uGrid.RedimPreserve(0,V.Local.iUB)
+'			F.Intrinsic.Math.Add(V.Local.iUB,1,V.Local.iUB)
+	F.Intrinsic.Control.EndIf
+	'add blank records to the UDT. for the other price categories that we do not have records for.
+	V.uGlobal.uGrid(v.Local.iUB)!Type.Set(V.GLOBAL.sType.Trim)
+	V.uGlobal.uGrid(v.Local.iUB)!Group.Set(V.GLOBAL.sGroup.Trim)
+	V.uGlobal.uGrid(v.Local.iUB)!Category.Set(V.ODBC.con!rst.FieldValTrim!Price_Cat)
+	V.uGlobal.uGrid(v.Local.iUB)!Min_Sales.Set(V.Local.iMinSales)
+	V.uGlobal.uGrid(v.Local.iUB)!Discount.Set("")
+	F.ODBC.con!rst.MoveNext
+F.Intrinsic.Control.Loop
+F.ODBC.con!rst.Close
+'F.Intrinsic.Debug.InvokeDebugger
+'F.Intrinsic.Debug.Stop
+'SORT THAT UDT  BY PRICE GROUP
+F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uGrid!Category,False)
+Gui.SS_Form1.gsflexgrid1.LoadFromUDT("V.UGLOBAL.uGrid","Rec_ID*!*Category*!*Min_Sales*!*Discount",1)
+'used for clearing the fields above.
+V.Global.bClear.Set(False)
+'	F.Intrinsic.Control.DoUntil(V.ODBC.con!rst.EOF,=,True)
+'		F.Intrinsic.Math.Add(V.Local.iR,1,V.Local.iR)
+'		F.Intrinsic.Math.Sub(V.Local.iR,1,V.Local.iRow)
+'		Gui.SS_Form1.gsflexgrid1.Rows(V.Local.iR)
+'		Gui.SS_Form1.gsflexgrid1.TextMatrix(0,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Rec_ID)
+'		Gui.SS_Form1.gsflexgrid1.TextMatrix(1,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Customer_Type)
+'		Gui.SS_Form1.gsflexgrid1.TextMatrix(2,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Customer_Class)
+'		Gui.SS_Form1.gsflexgrid1.TextMatrix(3,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Price_Group)
+'		Gui.SS_Form1.gsflexgrid1.TextMatrix(4,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Disc_Code)
+'		Gui.SS_Form1.gsflexgrid1.TextMatrix(5,V.Local.iRow,V.ODBC.con!rst.FieldValTrim!Min_Net_Sales)
+'		Gui.SS_Form1.gsflexgrid1.ApplyStyle(V.Local.iRow,1)
+'		F.ODBC.con!rst.MoveNext
+'	F.Intrinsic.Control.Loop
+Gui.SS_Form1.gsflexgrid1.Visible(True)
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("load_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Cust.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+
+
+
+program.sub.load_click.End
+
+program.sub.discode_click.start
+'F.Intrinsic.Control.SetErrorHandler("discode_click_Err")
+'F.Intrinsic.Control.ClearErrors
+'
+'V.Local.sError.Declare(String)
+'V.Local.sSQL.Declare(String)
+'V.Local.sCol.Declare(String)
+'V.Local.sColW.Declare(String)
+'V.Local.sRet.Declare(String)
+'
+''F.Intrinsic.String.Concat("Select Distinct(Disc_Code) From GCG_Disc_Cust Where Disc_Code IS NOT NULL or Disc_Code <> '' Order By Disc_Code Asc","",V.Local.sSQL)
+''changes made by TRT to pull from correct table GCG_Disc_Code
+'V.Local.sSQL.Set("Select Distinct(Disc_Code) From GCG_Disc_Code Order By Disc_Code")
+'V.Local.sCol.Set("Discount Code")
+'V.Local.sColW.Set("3500")
+'F.Intrinsic.UI.Browser("Select a Discount Code","Con",V.Local.sSQL,V.Local.sCol,V.Local.sColW,V.Local.sRet)
+'F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+'	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+''	Gui.SS_Form1.txtDisCode.Text(V.Local.sRet(0).Trim)
+'F.Intrinsic.Control.EndIf
+'
+'F.Intrinsic.Control.ExitSub
+'
+'F.Intrinsic.Control.Label("discode_click_Err")
+'F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+'	Function.Intrinsic.String.Concat("Project: GCG_Disc_Cust.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+'	F.Intrinsic.UI.Msgbox(V.Local.sError)
+'	F.Intrinsic.Control.CallSub(Unload)
+'Function.Intrinsic.Control.EndIf
+'
+
+program.sub.discode_click.End
+
+program.sub.save_click.start
+F.Intrinsic.Control.SetErrorHandler("save_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.iRow.Declare(Long)
+V.Local.sRow.Declare(String)
+V.Local.sRowArray.Declare(String)
+V.Local.iR.Declare(Long)
+V.Local.iRecID.Declare(Long)
+V.Local.sTableName.Declare(String)
+V.Local.sFieldName.Declare(String)
+V.Local.sTxtFields.Declare(String)
+V.Local.sRefer.Declare(String)
+V.Local.sRet.Declare(String)
+V.local.iC.Declare(Long)
+V.Local.iRet.Declare(Long)
+V.Local.sMsg.Declare(String)
+
+Gui.SS_Form1.cmdAdd.Enabled(False)
+F.Intrinsic.UI.InvokeWaitDialog("Saving...","Please Wait")
+
+'edti by TRT
+'verify first that the data they entered is actually what is found within the tables? Type and Group only
+'table name
+F.Intrinsic.String.Split("GCG_3848_Disc_Type*!*GCG_3848_Disc_Group","*!*",V.Local.sTableName)
+'field names
+F.Intrinsic.String.Split("Customer_Type*!*Price_Group","*!*",V.Local.sFieldName)
+'txtfields
+F.Intrinsic.String.Split("txtType*!*txtGroup","*!*",V.Local.sTxtFields)
+'sRefer field to give what was needed.
+F.Intrinsic.String.Split("Type*!*Group","*!*",V.Local.sRefer)
+'F.Intrinsic.Debug.InvokeDebugger
+'F.Intrinsic.Debug.Stop
+'loop through entirety
+F.Intrinsic.Control.For(V.Local.iR,0,1,1)
+	'first make sure that a field is not blank
+	F.Intrinsic.Control.If(v.Screen.SS_Form1![v.local.stxtfields(v.local.ir)].Text,=,"")
+		Gui.SS_Form1.cmdAdd.Enabled(True)
+		F.Intrinsic.UI.CloseWaitDialog
+		F.Intrinsic.String.Concat(V.Local.sRefer(v.Local.iR)," cannot be blank.",V.local.sSQL)
+		F.Intrinsic.UI.Msgbox(V.Local.sSQL,"Save Error")
+		F.Intrinsic.Control.ExitSub
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Concat("Select * From ",v.Local.sTableName(v.Local.iR)," Where ",v.Local.sFieldName(v.Local.iR)," = '",v.Screen.SS_Form1![v.local.sTXTfields(v.local.ir)].Text,"'",v.Local.sSQL)
+'F.Intrinsic.Debug.InvokeDebugger
+'F.Intrinsic.Debug.Stop
+'		F.Intrinsic.String.Build("Select * From {0} Where {1} = '{2}'",v.Local.sTableName(v.Local.iR),v.Local.sFieldName(v.Local.iR),v.Screen.SS_Form1![v.local.sTxtFields(v.local.ir)],v.Local.sSQL)
+		F.ODBC.connection!con.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+		F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,True)
+			Gui.SS_Form1.cmdAdd.Enabled(True)
+			F.Intrinsic.UI.CloseWaitDialog
+			F.Intrinsic.String.Concat("Verify correct ",V.Local.sRefer(v.Local.iR)," field entry.",V.local.sSQL)
+			F.Intrinsic.UI.Msgbox(V.Local.sSQL,"Save Error")
+			F.ODBC.con!rst.Close
+			F.Intrinsic.Control.ExitSub
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rst.Close
+F.Intrinsic.Control.Next(V.Local.iR)
+
+'commit our flexgrid info
+Gui.SS_Form1.gsflexgrid1.Commit
+
+'get total row count
+V.Local.iRet.Set(V.Screen.SS_Form1!gsflexgrid1.Rows)
+F.Intrinsic.Math.Sub(V.Local.iRet,1,V.Local.iRow)
+
+Gui.SS_Form1.gsflexgrid1.Visible(False)
+
+'dont want to read our header row
+V.Local.iC.Set(1)
+
+F.Intrinsic.Control.DoUntil(V.Local.iC,=,V.Local.iRet)
+	Gui.SS_Form1.gsflexgrid1.ReadRow(V.Local.iC,V.Local.sRet)
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	'need to check for a valid discount code first
+	'if it's not blank, then check and see if it exists.
+	F.Intrinsic.Control.If(V.Local.sRet(3).Trim,<>,"")
+		F.Intrinsic.String.Concat("Select Disc_Code From GCG_3848_Disc_Code Where Disc_Code = '",V.Local.sRet(3),"'",V.Local.sSQL)
+		F.ODBC.Connection!con.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+		F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,True)
+			'meaning there isn't a valid code
+			Gui.SS_Form1.cmdAdd.Enabled(True)
+			Gui.SS_Form1.gsflexgrid1.Visible(True)
+			F.Intrinsic.UI.CloseWaitDialog
+			F.Intrinsic.String.Concat("Discount Code, ",V.Local.sRet(3),", for Category, ",V.local.sRet(1),", is not a valid Discount code.",V.amBIENT.newline,"Records not saved.",V.local.sMsg)
+			F.Intrinsic.UI.Msgbox(V.Local.sMsg,"Save Error")
+			F.ODBC.con!rst.Close
+			F.Intrinsic.Control.ExitSub
+		F.Intrinsic.Control.EndIf
+	F.ODBC.con!rst.Close
+	F.Intrinsic.Control.EndIf
+	'now we have to go through and either update or add new record to the record set from the GCG_DISC_CUST table. Going to include blank discount code records as well.
+	F.Intrinsic.String.Build("Select * From GCG_3848_Disc_Cust Where Customer_Type = '{0}' AND Price_Group = '{1}' And Price_Category = '{2}'",V.Global.sType.Trim,V.Global.sGroup.Trim,V.Local.sRet(1),V.Local.sSQL)
+	F.ODBC.Connection!con.OpenLocalRecordsetRW("rst",V.Local.sSQL)
+	F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,True)
+		'meaning we need to add a new record and get a new id value
+		f.ODBC.Connection!con.Getid("GCG_3848_Disc_Cust","Rec_ID",True,v.Local.iRecId)
+		F.ODBC.con!rst.AddNew
+		F.ODBC.con!rst.Set!Rec_ID(V.Local.iRecId)
+	F.Intrinsic.Control.Endif
+	'update the records
+	'type, group, category, min net sales, discount code
+	F.ODBC.con!rst.Set!Customer_Type(V.Global.sType.Trim)
+	F.ODBC.con!rst.Set!Price_Group(V.global.sGroup.trim)
+	F.ODBC.con!rst.Set!Price_Category(V.Local.sRet(1))
+	F.ODBC.con!rst.Set!Min_Net_Sales(V.Local.sRet(2))
+	F.ODBC.con!rst.Set!Disc_Code(V.Local.sRet(3))
+	F.ODBC.con!rst.Update
+	F.ODBC.con!rst.Close
+	F.Intrinsic.Math.Add(V.Local.iC,1,V.Local.iC)
+F.Intrinsic.Control.Loop
+
+'after save have been done, clear out the Min Net Sales and Order Discount Code from text boxes.
+'edit by TRT
+'as we are coming from the save
+'V.Global.bClear.Set(True)
+'F.Intrinsic.Control.CallSub(Load_click)
+Gui.SS_Form1.txtType.Text("")
+Gui.SS_Form1.txtgroup.Text("")
+
+Gui.SS_Form1.txtgroup.Enabled(True)
+Gui.SS_Form1.txtType.Enabled(True)
+Gui.SS_Form1.cmd_txtgroup.Enabled(True)
+Gui.SS_Form1.cmd_txtType.Enabled(True)
+Gui.SS_Form1.cmdAdd.Enabled(True)
+Gui.SS_Form1.txtType.SetFocus
+F.Intrinsic.UI.CloseWaitDialog
+F.Intrinsic.Control.CallSub(Flexgrid)
+Gui.SS_Form1.gsflexgrid1.Visible(True)
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("save_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Disc_Cust.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.save_click.End
+
+Program.Sub.Flexgrid.Start
+F.Intrinsic.Control.SetErrorHandler("Flexgrid_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iC.Declare(Long)
+'MAY HAVE TO CLEAR THIS OUT
+'Gui.SS_Form1.gsflexgrid1.Visible(False)
+Gui.SS_Form1.gsflexgrid1.RowS(1)
+Gui.SS_Form1.gsflexgrid1.Rows(2)
+Gui.SS_Form1.gsflexgrid1.Cols(5)
+Gui.SS_Form1.gsflexgrid1.TextMatrix(0,0,"Rec ID")
+Gui.SS_Form1.gsflexgrid1.ColWidth(0,0)
+Gui.SS_Form1.gsflexgrid1.TextMatrix(1,0,"Price Category")
+Gui.SS_Form1.gsflexgrid1.ColWidth(1,3000)
+Gui.SS_Form1.gsflexgrid1.TextMatrix(2,0,"Min Net Sales")
+Gui.SS_Form1.gsflexgrid1.ColWidth(2,2000)
+Gui.SS_Form1.gsflexgrid1.TextMatrix(3,0,"Discount Code")
+Gui.SS_Form1.gsflexgrid1.ColWidth(3,2000)
+Gui.SS_Form1.gsflexgrid1.TextMatrix(4,0,"Browser")
+Gui.SS_Form1.gsflexgrid1.ColWidth(4,1000)
+
+Gui.SS_Form1.gsflexgrid1.FixedRows(1)
+
+F.Intrinsic.Control.For(V.Local.iC,0,1,1)
+	Gui.SS_Form1.gsflexgrid1.BuildStyle(1,V.Local.iC,"Type","Locked","True")
+	Gui.SS_Form1.gsflexgrid1.BuildStyle(1,V.Local.iC,"Format","Alignment",2)
+F.Intrinsic.Control.Next(V.Local.iC)
+
+Gui.SS_Form1.gsflexgrid1.BuildStyle(1,2,"Format","Alignment",6)
+Gui.SS_Form1.gsflexgrid1.BuildStyle(1,2,"Type","Locked",True)
+'Gui.SS_Form1.gsflexgrid1.BuildStyle(1,2,"Format","Alignment",2)
+Gui.SS_Form1.gsflexgrid1.BuildStyle(1,2,"format","Mask","#,##0")
+
+
+
+
+F.Intrinsic.Control.For(V.Local.iC,4,4,1)
+	Gui.SS_Form1.gsflexgrid1.BuildStyle(1,V.Local.iC,"Type","Command","*")
+	Gui.SS_Form1.gsflexgrid1.BuildStyle(1,V.Local.iC,"Format","Alignment",4)
+F.Intrinsic.Control.Next(V.Local.iC)
+'Gui.SS_Form1.gsflexgrid1.Visible(True)
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Flexgrid_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_Disc_Cust.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Flexgrid.End
+
+program.sub.gsflexgrid1_mouseup.start
+''sub that will multi quick sort the columns
+''depending on the user and which column they have chosen.
+'
+'V.local.iCol.Declare(Long)
+'
+'
+'
+'F.Intrinsic.Control.If(V.Args.Mouserow.Trim,<>,0)
+'	F.Intrinsic.Control.ExitSub
+'F.Intrinsic.Control.EndIf
+'
+'Gui.SS_Form1.gsflexgrid1.Visible(false)
+'
+'F.Intrinsic.Control.If(V.Global.bSort,=,True)
+'	V.Global.bSort.Set(False)
+'F.Intrinsic.Control.Else
+'	V.Global.bSort.Set(True)
+'F.Intrinsic.Control.EndIf
+'
+'V.Local.iCol.Set(V.Args.mousecol.Trim)
+'
+'F.Intrinsic.Control.SelectCase(V.Local.iCol)
+'	F.Intrinsic.Control.Case(1)
+'		F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uGrid!Category,V.Global.bSort)
+'	F.Intrinsic.Control.Case(2)
+'		F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uGrid!Class,V.Global.bSort)
+'	F.Intrinsic.Control.Case(3)
+'		F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uGrid!Group,V.Global.bSort)
+'	F.Intrinsic.Control.Case(4)
+'		F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uGrid!Discount,V.Global.bSort)
+'	F.Intrinsic.Control.Case(5)
+'		F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uGrid!Min_Sales,V.Global.bSort)
+'F.Intrinsic.Control.EndSelect
+'
+'Gui.SS_Form1.gsflexgrid1.LoadFromUDT("v.uglobal.uGrid","Rec_ID*!*Category*!*Class*!*Group*!*Discount*!*Min_Sales",1)
+'
+'Gui.SS_Form1.gsflexgrid1.Visible(True)
+
+program.sub.gsflexgrid1_mouseup.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_Disc_Cust$}$ERIC$}$2/20/2013$}$False
+${$1$}$$}$$}$1$}$14370$}$Script 2$}$4/15/2013 3:42:39 PM$}$(Program: AR0020GI; Screen: ARS002A1)
+
+${$1$}$$}$$}$0$}$14350$}$Populate Hook$}$4/15/2013 3:42:03 PM$}$(Program: AR0020GI; Screen: ARS002A1)
+
+${$3$}$0$}$$}$-1$}$-1$}$$}$1/1/1900$}$Quote 4206
+
+Discount Customer Maintenance portion of the entire project.
+${$4$}$0$}$$}$0$}$-1$}$TRT$}$8/1/2013 3:47:11 PM$}$disccode_click
+-Made change to pull from GCG_Disc_COde table
+class_click
+-Made change to pull from GCG_disc_Class table
+Category_Click
+-Made change to pull from GCG_Disc_Cat table
+Type_Click
+-Made change to pull from GCG_Disc_Type table
+group_click
+-made change to pull from gcg_Disc_group table
+${$4$}$0$}$$}$1$}$-1$}$TRT$}$8/2/2013 2:36:42 PM$}$-Error occurred when writing a record to GCG_Disc_Cust table where EOF is true.  Added the GET ID GAB command to not reference any records from the table, only add in records
+-Changed Min Net Sales text box to unsigned integer only as the field type of Min_Net_Sales is INTEGER and decimal values are not allowed to be written to the field.
+
+${$4$}$0$}$$}$2$}$-1$}$trt$}$8/6/2013 2:42:18 PM$}$-Validation at time of save, if a record already exists with same combination in the table only update, only can have once combo of choices.
+-Further validation on save to make sure that the proper Type, Class, Group, category, and discount codes are chosen before the save or update occurs.
+-Clear out Disc Code and Min Net Sales value once save has been clicked.
+-set focus to disc code when save has been clicked.
+
+${$4$}$0$}$$}$3$}$-1$}$TRT$}$8/9/2013 11:20:47 AM$}$Limit of 9 characters set on the Min-Net Sales text box.
+${$4$}$0$}$$}$4$}$-1$}$TRT$}$10/29/2013 8:46:19 AM$}$Changes required for Quote 5042
+Program.Sub.Comments.End
+
+Program.Sub.ScreenSS.Start
+SS_Form1{{CAPTION::Discount Customer Maintenance Program
+SS_Form1.CTRL{{NAME::txtType\\TYPE::2\\CAPTION::Type\\GROUP::1\\BROWSER::1\\SIZE::1
+SS_Form1.CTRL{{NAME::txtClass\\TYPE::2\\CAPTION::Class\\GROUP::1\\BROWSER::1\\SIZE::1
+SS_Form1.CTRL{{NAME::txtgroup\\TYPE::2\\CAPTION::Group\\GROUP::1\\BROWSER::1\\SIZE::1
+SS_Form1.CTRL{{NAME::txtCategory\\TYPE::2\\CAPTION::Category\\GROUP::1\\BROWSER::1\\SIZE::1
+SS_Form1.CTRL{{NAME::cmdLoad\\TYPE::5\\CAPTION::Load\\GROUP::1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::txtDisCode\\TYPE::2\\CAPTION::Discount Code\\GROUP::2\\BROWSER::1\\SIZE::1
+SS_Form1.CTRL{{NAME::txtNetSales\\TYPE::2\\CAPTION::Min. Net Sales\\GROUP::2\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::cmdAdd\\TYPE::5\\CAPTION::Add\\GROUP::2\\BROWSER::0\\SIZE::1
+
+Program.Sub.ScreenSS.End
+
