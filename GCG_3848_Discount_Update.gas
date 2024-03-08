@@ -1,0 +1,129 @@
+Program.Sub.ScreenSU.Start
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+'edit by TRT. Had to add this CALLsub in there because it was not in there.
+F.Intrinsic.Control.CallSub(Disccalc)
+
+Program.Sub.Main.End
+
+Program.Sub.Unload.Start
+F.ODBC.Connection!con.Close
+F.Intrinsic.Control.End
+
+Program.Sub.Unload.End
+
+Program.Sub.DiscCalc.Start
+F.Intrinsic.Control.SetErrorHandler("DiscCalc_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSql.Declare(String)
+V.Local.fNetSales.Declare(Float)
+V.Local.sDisc.Declare(String)
+V.Local.sCustType.Declare(String)
+
+'change by TRT
+'I have to get the CODE SORT FIELD FROM THE ORDER HEADER, if its there,
+'IF ITS NOT THEN I HAVE TO GO THROUGH THE CUSTOMER MASTER, CUSTOMER_SALES TABLE
+'THIS IS HOW WE ARE GOING TO DETERMINE WHAT THE CUSTOMER TYPE IS GOING TO BE.
+
+
+
+'Getting the price category based on the part number
+'edit by TRT, the from was missing.
+F.Intrinsic.String.Concat("Select Price_Cat from GCG_3848_Disc_Part where Part = '",V.Passed.PART.Trim,"' and Loc = '",V.Passed.LOCATION.Trim,"'",V.Local.sSql)
+F.ODBC.Connection!con.OpenLocalRecordsetRO("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	'Getting initial/beginning net sales
+	'edit by trt the from was missing for the table
+	F.Intrinsic.String.Concat("Select Init_Net_Sales From GCG_3848_Beg_Sales where Customer = '",V.Passed.CUSTOMER.Trim,"'",V.Local.sSql)
+	F.ODBC.Connection!con.OpenLocalRecordsetRO("rstSales",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rstSales.EOF,=,True)
+		V.Local.fNetSales.Set(0)
+	F.Intrinsic.Control.Else
+		V.Local.fNetSales.Set(V.ODBC.con!rstSales.FieldValFloat!Init_Net_Sales)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rstSales.Close
+
+	'Getting current net sales to see if greater than initial net sales for customer	
+	'edit by trt the from was missing from the sql and correct the field name as that was wrong as well.
+	F.Intrinsic.String.Concat("Select Curr_Net_Sales From GCG_3848_Curr_Sales where Customer = '",V.Passed.CUSTOMER.Trim,"'",V.Local.sSql)
+	F.ODBC.Connection!con.OpenLocalRecordsetRO("rstSales",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rstSales.EOF,=,False)
+		F.Intrinsic.Control.If(V.ODBC.con!rstSales.FieldValFloat!Curr_Net_Sales,>,V.Local.fNetSales)
+			V.Local.fNetSales.Set(V.ODBC.con!rstSales.FieldValFloat!Curr_Net_Sales)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rstSales.Close
+'*************************************'*******************************************************************************************************************
+'TRT CHANGES'
+	'if not there we will grab from customer master
+	F.Intrinsic.String.Concat("Select C_Sort_1 From V_Customer_Sales Where Customer = '",V.Passed.CUSTOMER.Trim,"'",V.Local.sSql)
+	F.ODBC.Connection!con.OpenLocalRecordsetRO("rstType",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rstType.EOF,<>,True)
+		V.Local.sCustType.Set(V.ODBC.con!rstType.FieldValTrim!C_Sort_1)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rstType.Close
+'A***************************************************************************************************************************************************
+
+	'had to change the sql query for this as well, only too look at customer type and price category sequences, customer is no longer going to be a key when doing this, the customer type
+'	will be found from the query directly above.
+'	'Determining discount code based on current sales
+	F.Intrinsic.String.Concat("Select * from GCG_3848_Disc_Cust where Customer_Type = '",V.local.sCustType.trim,"' AND  Price_Category = '",V.ODBC.con!rst.FieldValTrim!Price_Cat,"' ORDER BY Min_Net_Sales",V.Local.sSql)
+	F.ODBC.Connection!con.OpenLocalRecordsetRO("rstDisc",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rstDisc.EOF,=,False)
+		F.Intrinsic.Control.DoUntil(V.ODBC.con!rstDisc.EOF,=,True)
+			F.Intrinsic.Control.If(V.Local.fNetSales,>=,V.ODBC.con!rstDisc.FieldValFloat!Min_Net_Sales)
+				F.Intrinsic.String.Concat("Select Disc_Percent from GCG_3848_Disc_Code where Disc_Code = '",V.ODBC.con!rstDisc.FieldValTrim!Disc_Code,"'",V.Local.sSql)
+				F.ODBC.Connection!con.OpenLocalRecordsetRO("rstCode",V.Local.sSql)
+				F.Intrinsic.Control.If(V.ODBC.con!rstCode.EOF,=,False)
+					V.Passed.APPLIED.Set(True)
+					F.Intrinsic.String.Format(V.ODBC.con!rstCode.FieldValFloat!Disc_Percent,"0.0000",V.Local.sDisc)
+					V.Passed.DISCOUNT.Set(V.Local.sDisc)
+					'edit by TRT, this was not being passed originally, needed to store to the user field.
+					V.Passed.SOURCE.Set(V.ODBC.con!rst.FieldValTrim!Price_Cat)
+				F.Intrinsic.Control.EndIf
+				F.ODBC.con!rstCode.Close
+				'edit by TRT, removed the exit do because it was only applying the first instance, not continuing through the recordset like it should to have a
+				'more applicable discount code amount.
+'				F.Intrinsic.Control.ExitDo
+			F.Intrinsic.Control.EndIf
+			F.ODBC.con!rstDisc.MoveNext
+		F.Intrinsic.Control.Loop
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rstDisc.Close
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Close
+F.Intrinsic.Control.CallSub(Unload)
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("DiscCalc_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Discount_Update.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.DiscCalc.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_Discount_Update$}$MLA$}$2/20/2013
+${$1$}$$}$$}$0$}$41400$}$Discount Calc$}$4/15/2013 4:15:04 PM$}$
+${$3$}$0$}$$}$-1$}$-1$}$$}$1/1/1900$}$Discount calculation and update
+Micro-Trak
+${$4$}$0$}$$}$0$}$-1$}$TRT$}$8/2/2013 4:23:05 PM$}$Updated the Disc Calc, refer to in line comments for exact changes
+${$4$}$0$}$$}$1$}$-1$}$TRT$}$8/8/2013 9:02:55 AM$}$-Main subroutine was missing the call sub for the disccalc subroutine
+-Disc Calc sub was missing the SOURCE passed variable that will store the price_Cat from the part and location that was setupin the GCG_Disc_Part table.
+${$4$}$0$}$$}$2$}$-1$}$TRT$}$8/12/2013 9:10:59 AM$}$				'edit by TRT, removed the exit do because it was only applying the first instance, not continuing through the recordset like it should to have a
+				'more applicable discount code amount.
+Program.Sub.Comments.End
+
