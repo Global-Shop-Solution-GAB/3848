@@ -1,0 +1,194 @@
+Program.Sub.ScreenSU.Start
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.UDT.uCustomer.Define("Customer",String,Customer)
+Variable.uGlobal.uCustomer.Declare("uCustomer")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'Quote 4206
+'Discount Current Net Sales Nighlty UPdate program
+'2/27/13
+'coded by TRT
+
+
+'this will be ran on the task scheduler nighlty, the program will go through customers and use the core module
+'for calculating net sales to calculate net sales for the first day of the current year to the current day.
+'It will then update a table that stores the following
+'GCG_Disc_Curr_Sales
+'Customer -String-Customer ID of current customer process is running
+'Current Net Sales- Calculated net sales core module will return this for each customer
+
+
+
+'012/29/2014
+'mods by TRT, its to slow for the customer so we are going to first check and see if their amuont sales has changed from whats in the table.
+'if they have we will call the discount change piece of this, else we are just going to next customer becuase no change is needed.
+'happening in CalcNetSales sub
+
+'mod 6/25/2014
+'have to take gross+ discount (discount should be negative) and use that as the new sales value.
+
+V.Local.bExist.Declare(Boolean)
+
+F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+F.ODBC.Connection!conx.TableExists("GCG_3848_Curr_Sales",V.Local.bExist)
+
+F.Intrinsic.Control.If(V.Local.bExist,=,True)
+	F.Intrinsic.UI.InvokeWaitDialog("Update...","Update Discount Current Sales")
+	F.Intrinsic.Control.CallSub(Calculatenetsales)
+	F.Intrinsic.UI.CloseWaitDialog
+	F.Intrinsic.Control.End
+F.Intrinsic.Control.Else
+	F.Intrinsic.Debug.SetLA("GCG_3848_Curr_Sales not found in company database")
+	F.Intrinsic.Control.End
+F.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+Program.Sub.CalculateNetSales.Start
+F.Intrinsic.Control.SetErrorHandler("CalculateNetSales_Err")
+F.Intrinsic.Control.ClearErrors
+
+'here is where we are going through each customer and use the core module for calculating net sales to calculate net sales for the first day of the current
+'year to the current day.  It will then update a table that stores the following
+'customer
+'current net sales
+V.Local.sError.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.iC.Declare(Long)
+V.Local.sQuery.Declare(String)
+V.Local.sBegDate.Declare(String)
+V.Local.sToday.Declare(String)
+V.Local.sParam.Declare(String)
+V.Local.sMessage.Declare(String)
+V.Local.sRet.Declare(String)
+'value that was either in the table, or will be 0 if customer was not in the table.
+V.Local.fOrigSales.Declare(Float)
+'new net sales value returned from our callwrapper
+V.Local.fNewSale.Declare(Float)
+'used to signify the change within our current customers sales when we are looping through.
+V.Local.bChangeFlag.Declare(Boolean)
+'sRetDisc stores discount from ambient return
+'fRetGross stores gross from abient reutnr
+V.Local.fRetGross.Declare(Float)
+V.Local.fRetDisc.Declare(Float)
+
+
+
+
+F.ODBC.Connection!conx.OpenLocalRecordsetRO("rst","Select Distinct Customer From V_Customer_Master Order By Customer")
+F.Intrinsic.Variable.LoadUDTFromRecordset("conx","rst","v.uGlobal.uCustomer",False)
+F.ODBC.conx!rst.Close
+
+'get the date values
+'current date
+V.Local.sToday.Set(V.Ambient.Date)
+F.Intrinsic.String.Format(V.Local.sToday,"YYYYMMDD",V.Local.sToday)
+'now we need to get the first day of the current year?
+F.Intrinsic.Date.Year(V.Ambient.Date,V.Local.sBegDate)
+F.Intrinsic.String.Concat(V.Local.sBegDate,"0101",V.Local.sBegDate)
+
+F.Intrinsic.Control.DoUntil(V.Local.iC,>,V.uGlobal.uCustomer.UBound)
+	F.Intrinsic.UI.ChangeWaitStatus("Calculating sale updates for customers...",V.Local.iC,0,V.uGlobal.uCustomer.UBound)
+	'now each time we are going through this loop, lets see if a customer is already stored within the GCG_DISC_Bales were not found.
+	F.Intrinsic.String.Concat("Select * From GCG_3848_Curr_Sales Where Customer = '",V.uGlobal.uCustomer(v.Local.iC)!Customer,"'",V.Local.sSQL)
+	F.ODBC.Connection!conx.OpenLocalRecordsetRW("rst",V.Local.sSQL)
+	F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,True)
+		'since customer was not in there we know the current sales is assumed to be 0. and we have a change.
+		V.Local.fOrigSales.Set(0.00)
+		'must add new and pass this to callwrapper mode 4100, with params.
+		F.Intrinsic.String.Concat(V.uGlobal.uCustomer(v.Local.iC)!Customer,"!*!",V.Local.sBegDate,"!*!",V.Local.sToday,"!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!",V.Local.sParam)
+		F.Global.General.CallWrapperSync(4100,V.Local.sParam)
+		v.Local.sRet.Set(v.Ambient.CallWrapperReturn)
+		F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+		'sRet(24) stores the GROSS value that we need. We then need to update this information into the table by adding a new record to the GCG_Disc_Beg_Sales
+		F.Intrinsic.String.Split(V.Local.sRet(24),"::",V.Local.fRetGross)
+		F.Intrinsic.String.Split(V.Local.sRet(27),"::",V.Local.fRetDisc)
+		F.Intrinsic.Math.Add(V.Local.fRetGross(1),V.Local.fRetDisc(1),V.Local.fNewSale)
+		F.Intrinsic.Control.If(V.Local.fNewSale,<>,V.Local.fOrigSales)
+			V.Local.bChangeFlag.Set(True)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.conx!rst.AddNew
+		F.ODBC.conx!rst.Set!Customer(V.uGlobal.uCustomer(v.Local.iC)!Customer)
+		F.ODBC.conx!rst.Set!Curr_Net_Sales(V.Local.fNewSale)
+	F.Intrinsic.Control.Else
+		V.Local.fOrigSales.Set(V.ODBC.conx!rst.FieldValFloat!Curr_Net_Sales)
+		'means the customer discount beginning net sales were found in table
+		'must add new and pass this to callwrapper mode 4100, with params.
+		F.Intrinsic.String.Concat(V.uGlobal.uCustomer(v.Local.ic)!Customer,"!*!",V.Local.sBegDate,"!*!",V.Local.sToday,"!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!!*!",V.Local.sParam)
+		F.Global.General.CallWrapperSync(4100,V.Local.sParam)
+		V.Local.sRet.Set(V.Ambient.callwrapperreturn)
+		F.Intrinsic.string.Split(V.Local.sRet,"*!*",V.Local.sRet)
+		'sRet(24) stores the GROSS value that we need. We then need to update this information into the table by adding a new record to the GCG_Disc_Beg_Sales
+		'modification to include the calucaltion of gross less discount, meaning discount should be a negative...
+
+F.Intrinsic.Control.If(V.uGlobal.uCustomer(v.Local.iC)!Customer,=,"011427")
+	
+F.Intrinsic.Control.EndIf
+		F.Intrinsic.String.Split(V.Local.sRet(24),"::",V.Local.fRetGross)
+		F.Intrinsic.String.Split(V.Local.sRet(27),"::",V.Local.fRetDisc)
+		F.Intrinsic.Math.Add(V.Local.fRetGross(1),V.Local.fRetDisc(1),V.Local.fNewSale)
+'		V.Local.fNewSale.Set(V.Local.sRet(1))
+		F.Intrinsic.Control.If(V.Local.fNewSale,<>,V.Local.fOrigSales)
+			V.Local.bChangeFlag.Set(True)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.conx!rst.Set!Curr_Net_Sales(V.Local.fNewSale)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.conx!rst.Update
+	F.ODBC.conx!rst.Close
+	'We are only going to call this if a discount chagne is needed because our net sales value has changed.
+	F.Intrinsic.Control.If(V.Local.bChangeFlag,=,True)
+		F.Intrinsic.Control.CallSub(Discountchange,"Customer",V.uGlobal.uCustomer(v.Local.iC)!Customer)
+	F.Intrinsic.Control.EndIf
+	F.Intrinsic.Math.Add(V.Local.iC,1,V.Local.iC)
+	'reset to false for next customer
+	V.Local.bChangeFlag.Set(False)
+F.Intrinsic.Control.Loop
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("CalculateNetSales_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Update_Disc_Curr_Sales.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.End
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.CalculateNetSales.End
+
+Program.Sub.DiscountChange.Start
+F.Intrinsic.Control.SetErrorHandler("DiscountChange_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'this subroutine will be calling module 4110, for both quotes and orders
+'this will call the program notifying that a discount change has occured for the customer.
+'do this for both quotes and orders
+'argument passed from subroutine will be the customer
+
+V.Local.sParam.Declare(String)
+F.Intrinsic.String.Concat("Q!*!",V.Args.Customer,"!*!",V.Local.sParam)
+F.Global.General.CallWrapperSync(4110,V.Local.sParam)
+'replace Q with O for the Orders
+F.Intrinsic.String.Concat("O!*!",V.Args.Customer,"!*!",V.Local.sParam)
+F.Global.General.CallWrapperSync(4110,V.Local.sParam)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("DiscountChange_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3848_Update_Disc_Curr_Sales.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.End
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.DiscountChange.End
+
+
